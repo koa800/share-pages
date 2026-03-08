@@ -40,6 +40,37 @@
       font: 15px/1.72 -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
     }
     .wrap { max-width: 980px; margin: 0 auto; }
+    .topnav {
+      position: sticky;
+      top: 12px;
+      z-index: 40;
+      margin-bottom: 16px;
+    }
+    .topnav-inner {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px;
+      border: 1px solid rgba(23,34,24,.08);
+      border-radius: 24px;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 40px rgba(18,31,22,.1);
+      scrollbar-width: none;
+    }
+    .topnav-inner::-webkit-scrollbar { display:none; }
+    .topnav a {
+      flex: 0 0 auto;
+      padding: 10px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
     .hero, .toc, details.section {
       background: var(--card);
       border: 1px solid var(--line);
@@ -110,10 +141,15 @@
       border-radius: 16px;
       display:grid;
       place-items:center;
-      font-size: 18px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -.02em;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .service-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
     }
     .service-node strong {
       display:block;
@@ -144,6 +180,8 @@
       color: var(--accent);
       font-size: 22px;
       font-weight: 800;
+      min-height: 24px;
+      padding: 4px 0;
     }
     .priority-grid {
       display:grid;
@@ -339,19 +377,13 @@
     details.journey-block[open] > summary::after { content:"−"; }
     .summary-meta { font-size:13px; color:var(--muted); font-weight:600; line-height:1.6; }
     .page {
-      max-width: 1260px;
+      max-width: 1280px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 300px;
-      gap: 18px;
-      align-items: start;
+      display: block;
     }
     .content { min-width: 0; }
     .sidebar {
-      position: sticky;
-      top: 16px;
-      display: grid;
-      gap: 16px;
+      display: none;
     }
     .surface {
       background: var(--card);
@@ -819,11 +851,6 @@
       details.journey-block td:nth-child(2)::before { content:"メール内URL（UTAGEページ名・URL・メール内の設置場所）"; }
       details.journey-block td:nth-child(3)::before { content:"そのUTAGEページ内にあったLINEリンク（LINE流入経路名とURL）"; }
     }
-    @media (max-width: 1080px) {
-      .page { grid-template-columns: 1fr; }
-      .sidebar { display:none; }
-      .mobile-dock { display:grid; }
-    }
     @media (min-width: 740px) {
       body { padding: 22px 20px 72px; font-size:16px; }
       .toc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -837,10 +864,23 @@
       }
       .priority-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
+    @media (min-width: 960px) {
+      .topnav-inner {
+        justify-content: space-between;
+      }
+      .topnav a {
+        flex: 1 1 0;
+        text-align: center;
+      }
+      .issue-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .step-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
     @media (min-width: 980px) {
-      .toc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       h2 { font-size: 22px; }
-      details.section > summary { font-size: 21px; padding: 20px 24px; }
       details.journey-block > summary { padding: 20px 22px; padding-right: 72px; }
       details.journey-block > summary::after { right: 22px; top: 20px; }
     }
@@ -856,11 +896,31 @@
         grid-template-columns: 1fr;
       }
     }
+    @media (max-width: 640px) {
+      .topnav {
+        top: 8px;
+      }
+      .topnav a {
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      .mobile-dock { display:none; }
+    }
   </style>
 </head>
 <body>
 <div class="page">
 <main class="content">
+<nav aria-label="ページ内ナビ" class="topnav">
+<div class="topnav-inner">
+<a href="#purpose">①目的</a>
+<a href="#summary">②結論</a>
+<a href="#structure">③具体的な問題点</a>
+<a href="#actions">④具体的な改善アクション</a>
+<a href="#method">⑤問題発見の背景と確認方法</a>
+<a href="#evidence">⑥問題だと確信した根拠</a>
+</div>
+</nav>
 <section class="hero surface">
 <div class="hero-grid">
 <div class="hero-main">
@@ -875,7 +935,7 @@
 </div>
 <div class="service-flow" aria-label="誤接続が起きる流れ">
 <div class="service-node is-mailchimp">
-<div class="service-icon">MC</div>
+<div class="service-icon"><img alt="Mailchimp" referrerpolicy="no-referrer" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/mailchimp-favicons/apple-touch-icon.png"/></div>
 <div>
 <strong>Mailchimp</strong>
 <span>送信待ちが残っている現役メールだけを対象に確認しています。</span>
@@ -883,7 +943,7 @@
 </div>
 <div class="service-arrow" aria-hidden="true">→</div>
 <div class="service-node is-utage">
-<div class="service-icon">UT</div>
+<div class="service-icon"><img alt="UTAGE" referrerpolicy="no-referrer" src="https://utage-system.com/favicon/apple-touch-icon.png"/></div>
 <div>
 <strong>UTAGE</strong>
 <span>メール内リンクの着地先ページに、誤ったLINE直リンクが残っています。</span>
@@ -891,7 +951,7 @@
 </div>
 <div class="service-arrow" aria-hidden="true">→</div>
 <div class="service-node is-line">
-<div class="service-icon">LN</div>
+<div class="service-icon"><img alt="LINE" referrerpolicy="no-referrer" src="https://line.me/static/img/favicon-32x32.png"/></div>
 <div>
 <strong>LINE</strong>
 <span>停止中の「みかみ」へ飛ぶため、ここで誤接続が起きます。</span>
@@ -1352,47 +1412,6 @@
 </details>
 </section>
 </main>
-<aside class="sidebar">
-<section class="side-card">
-<h2>見る順番</h2>
-<p class="meta">1. 目的で対象範囲を確認する</p>
-<p class="meta">2. 結論で今の判断を掴む</p>
-<p class="meta">3. 具体的な問題点で修正対象を確認する</p>
-<p class="meta">4. 具体的な改善アクションで作業順を決める</p>
-<p class="meta">5. 問題発見の背景と確認方法で再確認手順を見る</p>
-<p class="meta">6. 問題だと確信した根拠で証拠を確認する</p>
-</section>
-<nav aria-label="ページ内ナビ" class="side-card side-nav">
-<h2>ページ内ナビ</h2>
-<a href="#purpose">①目的</a>
-<a href="#summary">②結論</a>
-<a href="#structure">③具体的な問題点</a>
-<a href="#actions">④具体的な改善アクション</a>
-<a href="#method">⑤問題発見の背景と確認方法</a>
-<a href="#evidence">⑥問題だと確信した根拠</a>
-</nav>
-<section class="side-card">
-<h2>詳細シナリオへ移動</h2>
-<div class="side-nav">
-<button data-target="journey-sns-fb-active" type="button">SNS Facebook 2025-10-15</button>
-<button data-target="journey-ai-x-active" type="button">AI X</button>
-<button data-target="journey-ai-fb-active" type="button">AI Facebook</button>
-</div>
-</section>
-<section class="side-card">
-<h2>詳細の開閉</h2>
-<div class="side-actions">
-<button data-open-all="journey" type="button">すべて開く</button>
-<button data-close-all="journey" type="button">すべて閉じる</button>
-</div>
-</section>
-</aside>
-<nav aria-label="モバイル用ショートカット" class="mobile-dock">
-<a href="#summary">② 結論</a>
-<a href="#structure">③ 問題点</a>
-<a href="#actions">④ 改善</a>
-<a href="#evidence">⑥ 根拠</a>
-</nav>
 </div>
 <script>
     const revealBlock = (target) => {
