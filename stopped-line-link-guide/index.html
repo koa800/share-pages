@@ -39,26 +39,23 @@
     }
     .wrap { max-width: 1180px; margin: 0 auto; }
     .topnav {
-      position: sticky;
-      top: 12px;
-      z-index: 40;
+      position: static;
       margin-bottom: 16px;
     }
     .topnav-inner {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
-      overflow-x: auto;
+      overflow: visible;
       padding: 10px;
       border: 1px solid rgba(23,34,24,.08);
       border-radius: 24px;
       background: rgba(255,255,255,.88);
       backdrop-filter: blur(18px);
       box-shadow: 0 18px 40px rgba(18,31,22,.1);
-      scrollbar-width: none;
     }
-    .topnav-inner::-webkit-scrollbar { display:none; }
     .topnav a {
-      min-width: 132px;
+      min-width: 0;
       padding: 12px 16px;
       border-radius: 16px;
       border: 1px solid var(--line);
@@ -67,10 +64,10 @@
       font-size: 15px;
       font-weight: 800;
       text-decoration: none;
-      white-space: nowrap;
       display: grid;
       gap: 2px;
       align-content: center;
+      text-align: left;
     }
     .nav-index {
       color: var(--muted);
@@ -82,6 +79,9 @@
     }
     .nav-label {
       line-height: 1.2;
+    }
+    section[id] {
+      scroll-margin-top: 96px;
     }
     .hero {
       background: var(--card);
@@ -120,7 +120,8 @@
     .warn { color:var(--warn); font-weight:800; }
     .lead { font-size: 16px; color: #233126; }
     .hero-meta { margin-top: 12px; color: var(--muted); font-size: 13px; }
-    .pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .hero-main { display:grid; gap:12px; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
     .pill {
       display:inline-flex;
       padding:8px 12px;
@@ -397,7 +398,7 @@
     }
     .stat-value {
       margin: 0;
-      font-size: 34px;
+      font-size: 32px;
       line-height: 1;
       letter-spacing: -.04em;
       font-weight: 800;
@@ -641,6 +642,33 @@
       gap: 10px;
       margin-top: 16px;
     }
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .evidence-card {
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+    }
+    .evidence-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .evidence-meta {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .evidence-card p:last-child {
+      margin-bottom: 0;
+    }
     .process-card {
       padding: 14px;
       border: 1px solid var(--line);
@@ -715,6 +743,11 @@
       .priority-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (min-width: 960px) {
+      .topnav {
+        position: sticky;
+        top: 12px;
+        z-index: 40;
+      }
       .topnav-inner {
         grid-template-columns: repeat(6, minmax(0, 1fr));
       }
@@ -740,6 +773,9 @@
       .flow-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
     }
     @media (max-width: 980px) {
       .block-head {
@@ -764,12 +800,16 @@
       }
     }
     @media (max-width: 640px) {
-      .topnav {
-        top: 8px;
+      section[id] {
+        scroll-margin-top: 24px;
+      }
+      .topnav-inner {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
       .topnav a {
         padding: 10px 12px;
         font-size: 14px;
+        min-width: 0;
       }
       .nav-index {
         font-size: 10px;
@@ -812,11 +852,10 @@
 <div class="hero-main">
 <p class="eyebrow">共有・修正用メモ</p>
 <h1>停止中のLINE誤接続を、迷わず直せる形に整理した文書です。</h1>
-<p class="lead">2026年3月9日時点で、Mailchimp で停止されておらず、まだ送信待ちの人が残っているメールだけを対象に、どのメールのどの場所にあるリンクが、どの UTAGE ページへ飛び、そのページのどの LINE リンクが問題なのかを、修正担当者が迷わず追える順序で整理しています。</p>
+<p class="lead">2026年3月9日時点で、今も送信待ちが残っている 5 メールを対象に、どのメールのどの場所にあるリンクが、どの UTAGE ページを経由して、停止中の LINE へ誤接続しているのかを、そのまま修正できる粒度で整理しています。</p>
 <div class="pill-row">
-<span class="pill">対象: 2026年3月9日時点で送信待ち件数が残っているメール</span>
-<span class="pill">対象外: 一時停止中のメール / 配信停止メール</span>
-<span class="pill">主問題: 停止中LINE直リンク</span>
+<span class="pill">対象: 送信待ち人数が残っているメールのみ</span>
+<span class="pill">主問題: UTAGE ページ内の停止中LINE直リンク</span>
 <span class="pill">運用原則: LINEリンクは必ず short.io</span>
 </div>
 <div class="service-flow" aria-label="誤接続が起きる流れ">
@@ -877,12 +916,12 @@
 <p class="stat-copy">SNS Facebook、AI X、AI Facebook の3本だけを主対象にしています。</p>
 </article>
 <article class="stat-card">
-<p class="stat-label">対象メール数</p>
-<p class="stat-value">5</p>
-<p class="stat-copy">どのメールのどこを押すと問題ページに着地するかまで絞っています。</p>
+<p class="stat-label">修正対象</p>
+<p class="stat-value">5 / 6</p>
+<p class="stat-copy">5メール・6ページまで絞り、どこを直せばいいかを確定しています。</p>
 </article>
 <article class="stat-card is-dark">
-<p class="stat-label">利用停止日</p>
+<p class="stat-label">誤接続の下限日</p>
 <p class="stat-value">2024-09-17</p>
 <p class="stat-copy">停止中の「みかみ」が利用停止になった日です。少なくともこの日以降は誤接続です。</p>
 </article>
@@ -1162,40 +1201,23 @@
 <p>Lステップの停止中一覧では、この「みかみ」の利用停止日が <span class="warn">2024年9月17日</span> です。したがって、少なくともこの日以降は誤接続です。</p>
 </div>
 </div>
-<table>
-<thead>
-<tr>
-<th>シナリオ</th>
-<th>2026年3月9日時点の送信待ち人数</th>
-<th>今回確認した稼働中メール</th>
-<th>確認したUTAGEページ</th>
-<th>判断</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SNS Facebook 個別3日間シナリオ 2025-10-15</td>
-<td>70人</td>
-<td>3通</td>
-<td>3ページ</td>
-<td>停止中の「みかみ」へ飛ぶ LINE 直リンクが残っている</td>
-</tr>
-<tr>
-<td>AI X 個別3日間シナリオ</td>
-<td>1人</td>
-<td>1通</td>
-<td>2ページ</td>
-<td>停止中の「みかみ」へ飛ぶ LINE 直リンクが残っている</td>
-</tr>
-<tr>
-<td>AI Facebook 個別3日間シナリオ</td>
-<td>1人</td>
-<td>1通</td>
-<td>1ページ</td>
-<td>停止中の「みかみ」へ飛ぶ LINE 直リンクが残っている</td>
-</tr>
-</tbody>
-</table>
+<div class="evidence-grid">
+<article class="evidence-card">
+<strong>SNS Facebook 個別3日間シナリオ 2025-10-15</strong>
+<p class="evidence-meta">送信待ち 70人 / 稼働中メール 3通 / 確認ページ 3ページ</p>
+<p>3通とも、リンク先の UTAGE ページ内に停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</p>
+</article>
+<article class="evidence-card">
+<strong>AI X 個別3日間シナリオ</strong>
+<p class="evidence-meta">送信待ち 1人 / 稼働中メール 1通 / 確認ページ 2ページ</p>
+<p>1通の中で開く 2 ページの両方に、同じ停止中 LINE 直リンクが残っています。</p>
+</article>
+<article class="evidence-card">
+<strong>AI Facebook 個別3日間シナリオ</strong>
+<p class="evidence-meta">送信待ち 1人 / 稼働中メール 1通 / 確認ページ 1ページ</p>
+<p>メールから開くメインページに、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</p>
+</article>
+</div>
 <details class="journey-block" id="journey-sns-fb-active">
 <summary>
 <span>SNS Facebook 個別3日間シナリオ 2025-10-15</span>
