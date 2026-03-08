@@ -12,12 +12,15 @@
       --surface-soft: #f7faf5;
       --surface-warm: #fff5ee;
       --surface-ok: #eef8f2;
+      --surface-blue: #f1f6ff;
       --line: #d7ded3;
       --line-strong: #c3cdc0;
       --text: #122018;
       --muted: #617065;
       --accent: #1e6a47;
       --accent-soft: #edf6f0;
+      --accent-blue: #3568d4;
+      --accent-gold: #c07c1f;
       --warn: #b64024;
       --warn-soft: #fff4ed;
       --shadow: 0 20px 46px rgba(16, 28, 19, 0.06);
@@ -104,33 +107,41 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 14px;
+      padding: 10px 12px 10px 16px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.88);
       color: var(--text);
       font: inherit;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
+      letter-spacing: 0.02em;
       box-shadow: 0 12px 28px rgba(17, 31, 21, 0.08);
     }
 
-    .nav-toggle-icon {
+    .nav-toggle::after {
+      content: "+";
       display: grid;
-      gap: 4px;
-      width: 14px;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 700;
     }
 
-    .nav-toggle-icon span {
-      height: 2px;
-      border-radius: 999px;
-      background: var(--text);
+    .nav-shell.is-open .nav-toggle::after {
+      content: "−";
     }
 
     .topnav-inner {
       display: none;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      gap: 10px;
       padding: 10px;
       border: 1px solid rgba(18, 32, 24, 0.08);
       border-radius: 24px;
@@ -145,9 +156,9 @@
 
     .topnav-link {
       display: grid;
-      gap: 4px;
+      gap: 6px;
       min-width: 0;
-      padding: 12px 14px;
+      padding: 14px 14px 13px;
       border-radius: 18px;
       border: 1px solid var(--line);
       background: #fff;
@@ -156,14 +167,14 @@
 
     .nav-index {
       color: var(--muted);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: 0.08em;
       line-height: 1;
     }
 
     .nav-label {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
       line-height: 1.18;
     }
@@ -173,18 +184,51 @@
     }
 
     .hero {
-      padding: 28px 22px;
+      padding: 34px 28px 28px;
       margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 251, 246, 0.98)),
         linear-gradient(135deg, rgba(30, 106, 71, 0.08), rgba(255, 255, 255, 0));
     }
 
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 999px;
+      filter: blur(30px);
+      opacity: 0.72;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: 220px;
+      height: 220px;
+      right: -40px;
+      top: -40px;
+      background: radial-gradient(circle, rgba(53, 104, 212, 0.18), rgba(53, 104, 212, 0));
+    }
+
+    .hero::after {
+      width: 260px;
+      height: 260px;
+      left: -60px;
+      bottom: -100px;
+      background: radial-gradient(circle, rgba(192, 124, 31, 0.14), rgba(192, 124, 31, 0));
+    }
+
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 408px);
-      gap: 20px;
+      grid-template-columns: minmax(0, 1.24fr) minmax(312px, 392px);
+      gap: 30px;
       align-items: start;
+      position: relative;
+      z-index: 1;
     }
 
     .eyebrow {
@@ -198,18 +242,28 @@
 
     h1 {
       margin: 0 0 16px;
-      max-inline-size: 10ch;
-      font-size: clamp(38px, 5.8vw, 66px);
-      line-height: 0.96;
-      letter-spacing: -0.05em;
+      max-inline-size: 12.5ch;
+      font-size: clamp(42px, 6vw, 74px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
       font-weight: 850;
     }
 
+    .hero-highlight {
+      position: relative;
+      display: inline;
+      padding-inline: 0.08em;
+      background:
+        linear-gradient(180deg, transparent 0 62%, rgba(30, 106, 71, 0.14) 62% 100%);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
     .lead {
-      max-inline-size: 36ch;
+      max-inline-size: 42ch;
       color: #223328;
       font-size: 18px;
-      line-height: 1.72;
+      line-height: 1.8;
     }
 
     .hero-meta-row {
@@ -232,27 +286,42 @@
     }
 
     .hero-note {
-      padding: 20px;
+      padding: 22px;
       border: 1px solid var(--line);
-      border-radius: 24px;
+      border-radius: 26px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 249, 243, 0.94));
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 34px rgba(17, 31, 21, 0.06);
     }
 
     .hero-note p:last-child {
       margin-bottom: 0;
     }
 
+    .hero-note::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(53, 104, 212, 0.06), transparent 32%),
+        linear-gradient(210deg, rgba(30, 106, 71, 0.05), transparent 34%);
+      pointer-events: none;
+    }
+
     .quick-list {
       display: grid;
-      gap: 10px;
-      margin-top: 12px;
+      gap: 12px;
+      margin-top: 14px;
     }
 
     .quick-item {
-      padding: 16px;
+      padding: 18px 16px;
       border: 1px solid var(--line);
       border-radius: 20px;
       background: #fff;
+      position: relative;
+      box-shadow: 0 12px 24px rgba(18, 32, 24, 0.03);
     }
 
     .quick-item.is-warn {
@@ -286,8 +355,22 @@
     .service-strip {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 20px;
+      gap: 14px;
+      margin-top: 24px;
+      position: relative;
+      align-items: stretch;
+    }
+
+    .service-strip::before {
+      content: "";
+      position: absolute;
+      left: 11%;
+      right: 11%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(30, 106, 71, 0.12), rgba(53, 104, 212, 0.14), rgba(30, 106, 71, 0.12));
+      transform: translateY(-50%);
+      pointer-events: none;
     }
 
     .service-card {
@@ -299,23 +382,14 @@
       border-radius: 22px;
       background: #fff;
       position: relative;
-    }
-
-    .service-card:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: -18px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--accent);
-      font-size: 24px;
-      font-weight: 700;
+      box-shadow: 0 10px 22px rgba(18, 32, 24, 0.04);
+      z-index: 1;
     }
 
     .service-icon {
       width: 44px;
       height: 44px;
-      padding: 8px;
+      padding: 7px;
       border-radius: 14px;
       border: 1px solid var(--line);
       background: #fffdf8;
@@ -349,6 +423,17 @@
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 245, 0.92));
       box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, rgba(30, 106, 71, 0.34), rgba(30, 106, 71, 0));
     }
 
     .stat-card.is-warn {
@@ -356,9 +441,17 @@
       border-color: rgba(182, 64, 36, 0.15);
     }
 
+    .stat-card.is-warn::before {
+      background: linear-gradient(90deg, rgba(182, 64, 36, 0.36), rgba(182, 64, 36, 0));
+    }
+
     .stat-card.is-ok {
       background: linear-gradient(180deg, #eef8f2, #f9fcfa);
       border-color: rgba(30, 106, 71, 0.14);
+    }
+
+    .stat-card.is-ok::before {
+      background: linear-gradient(90deg, rgba(53, 104, 212, 0.34), rgba(53, 104, 212, 0));
     }
 
     .stat-label {
@@ -390,6 +483,22 @@
       margin-bottom: 16px;
     }
 
+    .block-tone-plain {
+      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(249,251,246,.98));
+    }
+
+    .block-tone-soft {
+      background: linear-gradient(180deg, #fbfdfb, #f5f8f3);
+    }
+
+    .block-tone-warm {
+      background: linear-gradient(180deg, #fffdf9, #fbf1e7);
+    }
+
+    .block-tone-blue {
+      background: linear-gradient(180deg, #fbfcff, #f3f7ff);
+    }
+
     .block-head {
       display: grid;
       gap: 12px;
@@ -409,7 +518,7 @@
       gap: 8px;
       margin-bottom: 10px;
       color: var(--accent);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -425,13 +534,13 @@
 
     h2 {
       margin: 0;
-      font-size: 30px;
+      font-size: clamp(30px, 3vw, 38px);
       line-height: 1.15;
       letter-spacing: -0.04em;
     }
 
     .block-desc {
-      max-inline-size: 58ch;
+      max-inline-size: 60ch;
       color: var(--muted);
       font-size: 15px;
       line-height: 1.72;
@@ -483,10 +592,10 @@
     }
 
     .callout {
-      padding: 16px;
+      padding: 18px;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      background: #f7faf5;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(248, 251, 246, 0.98), rgba(252, 253, 250, 0.98));
     }
 
     .callout strong {
@@ -535,11 +644,144 @@
       gap: 16px;
     }
 
-    .scenario-panel {
-      padding: 20px;
+    .jump-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .jump-card {
+      display: block;
+      padding: 18px 16px 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 12px 26px rgba(18, 32, 24, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .jump-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, rgba(30, 106, 71, 0.84), rgba(30, 106, 71, 0.12));
+    }
+
+    .jump-card.is-sns::before {
+      background: linear-gradient(180deg, rgba(182, 64, 36, 0.84), rgba(182, 64, 36, 0.12));
+    }
+
+    .jump-card.is-aix::before {
+      background: linear-gradient(180deg, rgba(53, 104, 212, 0.84), rgba(53, 104, 212, 0.12));
+    }
+
+    .jump-card.is-aifb::before {
+      background: linear-gradient(180deg, rgba(30, 106, 71, 0.84), rgba(30, 106, 71, 0.12));
+    }
+
+    .jump-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .jump-card .quick-label {
+      margin-bottom: 10px;
+    }
+
+    .jump-card p:last-child {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    details.scenario-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
       border: 1px solid var(--line);
       border-radius: 24px;
       background: #fff;
+      box-shadow: 0 14px 28px rgba(18, 32, 24, 0.04);
+    }
+
+    details.scenario-panel[open] {
+      box-shadow: 0 18px 36px rgba(18, 32, 24, 0.06);
+    }
+
+    details.scenario-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: linear-gradient(180deg, rgba(30, 106, 71, 0.85), rgba(30, 106, 71, 0.12));
+    }
+
+    details.scenario-panel.scenario-sns::before {
+      background: linear-gradient(180deg, rgba(182, 64, 36, 0.85), rgba(182, 64, 36, 0.12));
+    }
+
+    details.scenario-panel.scenario-aix::before {
+      background: linear-gradient(180deg, rgba(53, 104, 212, 0.85), rgba(53, 104, 212, 0.12));
+    }
+
+    details.scenario-panel.scenario-aifb::before {
+      background: linear-gradient(180deg, rgba(30, 106, 71, 0.85), rgba(30, 106, 71, 0.12));
+    }
+
+    .scenario-panel.scenario-sns > summary {
+      background: linear-gradient(180deg, rgba(255, 247, 241, 0.98), rgba(255, 252, 249, 0.98));
+    }
+
+    .scenario-panel.scenario-aix > summary {
+      background: linear-gradient(180deg, rgba(241, 246, 255, 0.98), rgba(252, 253, 255, 0.98));
+    }
+
+    .scenario-panel.scenario-aifb > summary {
+      background: linear-gradient(180deg, rgba(245, 249, 243, 0.98), rgba(252, 253, 251, 0.98));
+    }
+
+    .scenario-panel > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 22px 20px 28px;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(249,251,246,.98));
+    }
+
+    .scenario-panel > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .scenario-panel > summary::after {
+      content: "+";
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .scenario-panel[open] > summary::after {
+      content: "−";
+    }
+
+    .scenario-panel[open] > summary {
+      border-bottom: 1px solid var(--line);
     }
 
     .scenario-head {
@@ -547,7 +789,6 @@
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 12px;
       align-items: start;
-      margin-bottom: 14px;
     }
 
     .scenario-kicker {
@@ -606,6 +847,14 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.7;
+    }
+
+    .scenario-body {
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(252,252,249,.96));
     }
 
     .repair-grid {
@@ -715,6 +964,36 @@
       display: block;
       font-size: 13px;
       line-height: 1.65;
+    }
+
+    .link-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .link-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: none;
+      text-decoration: none;
+    }
+
+    .link-action.is-secondary {
+      background: #f7faf5;
+      color: var(--muted);
     }
 
     .action-grid {
@@ -839,6 +1118,19 @@
       line-height: 1.6;
     }
 
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+    }
+
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .inline-strong {
       color: var(--warn);
       font-weight: 800;
@@ -870,13 +1162,14 @@
         grid-template-columns: 1fr;
       }
 
-      .service-card:not(:last-child)::after {
-        display: none;
+      .service-strip,
+      .evidence-grid,
+      .jump-grid {
+        grid-template-columns: 1fr;
       }
 
-      .service-strip,
-      .evidence-grid {
-        grid-template-columns: 1fr;
+      .service-strip::before {
+        display: none;
       }
     }
 
@@ -904,21 +1197,22 @@
       .scenario-badges {
         justify-content: flex-start;
       }
+
+      .jump-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
       h1 {
         max-inline-size: none;
-        font-size: clamp(34px, 12vw, 48px);
+        font-size: clamp(30px, 11vw, 44px);
+        line-height: 0.98;
       }
 
       .lead {
         max-inline-size: none;
         font-size: 17px;
-      }
-
-      .topnav-inner {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .detail-row {
@@ -970,6 +1264,10 @@
       .nav-label {
         font-size: 15px;
       }
+
+      .nav-toggle {
+        padding-inline: 14px 10px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -982,15 +1280,19 @@
       *::after {
         transition: none !important;
       }
+
+      .reveal-up {
+        opacity: 1 !important;
+        transform: none !important;
+      }
     }
   </style>
 </head>
 <body>
   <div class="page">
     <nav class="nav-shell" aria-label="ページ内ナビ" id="page-nav">
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="section-nav">
-        <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span id="nav-toggle-label">目次を開く</span>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="section-nav" aria-label="目次">
+        <span id="nav-toggle-label">目次</span>
       </button>
       <div class="topnav-inner" id="section-nav">
         <a class="topnav-link" href="#purpose"><span class="nav-index">01</span><span class="nav-label">目的</span></a>
@@ -1006,9 +1308,9 @@
       <section class="surface hero">
         <div class="hero-grid">
           <div>
-            <p class="eyebrow">共有・修正用メモ</p>
-            <h1>停止中LINEへの誤接続を、今日直せる状態に整理しました。</h1>
-            <p class="lead">2026年3月9日時点で、今も送信待ちが残っている 5 メールだけを対象に、どのメールのどの場所にあるリンクが、どの UTAGE ページを経由して、停止中の LINE に誤接続しているのかを、そのまま修正できる粒度で整理しています。</p>
+            <p class="eyebrow">共有・修正ガイド</p>
+            <h1>停止中LINEへの誤接続を、<br><span class="hero-highlight">今日直せる修正インターフェース</span>に。</h1>
+            <p class="lead">2026年3月9日時点で、送信待ちが残っている 5 メールだけを対象に、どのメールのどこから開く UTAGE ページに、停止中の LINE への誤リンクが残っているのかを、修正担当者がそのまま辿れる順でまとめています。</p>
             <div class="hero-meta-row">
               <span class="pill">対象は送信待ち人数が残っているメールのみ</span>
               <span class="pill">主問題は UTAGE ページ内の停止中LINE直リンク</span>
@@ -1064,17 +1366,17 @@
       <section class="stat-grid" aria-label="概要">
         <article class="stat-card is-warn">
           <p class="stat-label">送信待ち人数合計</p>
-          <p class="stat-value">72</p>
+          <p class="stat-value">72人</p>
           <p class="stat-copy">2026年3月9日時点で、この誤接続に触れる可能性がある送信待ち人数の合計です。</p>
         </article>
         <article class="stat-card">
           <p class="stat-label">対象シナリオ数</p>
-          <p class="stat-value">3</p>
+          <p class="stat-value">3本</p>
           <p class="stat-copy">SNS Facebook、AI X、AI Facebook の 3 本だけを主対象にしています。</p>
         </article>
         <article class="stat-card">
           <p class="stat-label">修正対象</p>
-          <p class="stat-value">5 / 6</p>
+          <p class="stat-value">5メール</p>
           <p class="stat-copy">5 メール・6 ページまで絞り、どこを直せばいいかを確定しています。</p>
         </article>
         <article class="stat-card is-ok">
@@ -1084,7 +1386,7 @@
         </article>
       </section>
 
-      <section class="surface block" id="purpose">
+      <section class="surface block block-tone-plain" id="purpose">
         <div class="block-head">
           <div class="block-head-row">
             <div>
@@ -1103,7 +1405,7 @@
         </div>
       </section>
 
-      <section class="surface block" id="summary">
+      <section class="surface block block-tone-soft" id="summary">
         <div class="block-head">
           <div class="block-head-row">
             <div>
@@ -1132,10 +1434,27 @@
             <p>一時停止中のメール、配信停止メール、送信待ちが残っていないメールは対象外にしています。</p>
             <p class="subtle-note">今回の修正対象は、2026年3月9日時点で実際に送信待ちが残っているメールだけです。</p>
           </div>
+          <div class="jump-grid" aria-label="最初に開くシナリオ">
+            <a class="jump-card is-sns" href="#scenario-sns">
+              <span class="quick-label">最優先</span>
+              <strong>SNS Facebook 個別3日間</strong>
+              <p>送信待ち 70人。まずここから直すと影響が最も大きいです。</p>
+            </a>
+            <a class="jump-card is-aix" href="#scenario-aix">
+              <span class="quick-label">次に確認</span>
+              <strong>AI X 個別3日間</strong>
+              <p>送信待ち 1人ですが、2ページに同じ誤リンクが残っています。</p>
+            </a>
+            <a class="jump-card is-aifb" href="#scenario-aifb">
+              <span class="quick-label">最後に確認</span>
+              <strong>AI Facebook 個別3日間</strong>
+              <p>送信待ち 1人。メインページ側の誤リンクだけを直せば完了します。</p>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section class="surface block" id="structure">
+      <section class="surface block block-tone-warm" id="structure">
         <div class="block-head">
           <div class="block-head-row">
             <div>
@@ -1144,7 +1463,7 @@
             </div>
             <button class="block-toggle" type="button" aria-label="具体的な問題点を開閉"></button>
           </div>
-          <p class="block-desc">どのシナリオの、どのメール内にある、どの UTAGE ページの、どの LINE リンクが間違っているのかを、修正担当者向けにそのまま読める順で並べています。</p>
+          <p class="block-desc">どのシナリオの、どのメールの、どの場所から開く UTAGE ページに、どの停止中リンクが残っているかを、修正順のまま置いています。</p>
         </div>
         <div class="block-content">
           <div class="callout">
@@ -1153,310 +1472,340 @@
             <p class="subtle-note">同じページ内で見つかった short.io は、参考情報として併記しています。差し替え先だと断定しているわけではありません。</p>
           </div>
 
+          <div class="jump-grid" aria-label="修正順ショートカット">
+            <a class="jump-card is-sns" href="#scenario-sns">
+              <span class="quick-label">1番目に修正</span>
+              <strong>SNS Facebook 個別3日間</strong>
+              <p>送信待ち 70人。AB テストを含む 3メールが対象です。</p>
+            </a>
+            <a class="jump-card is-aix" href="#scenario-aix">
+              <span class="quick-label">2番目に修正</span>
+              <strong>AI X 個別3日間</strong>
+              <p>送信待ち 1人。2ページに同じ停止中リンクが残っています。</p>
+            </a>
+            <a class="jump-card is-aifb" href="#scenario-aifb">
+              <span class="quick-label">3番目に修正</span>
+              <strong>AI Facebook 個別3日間</strong>
+              <p>送信待ち 1人。メインページのリンクだけを直せば完了です。</p>
+            </a>
+          </div>
+
           <div class="scenario-stack">
-            <article class="scenario-panel">
-              <div class="scenario-head">
-                <div>
-                  <p class="scenario-kicker">Mailchimp シナリオ</p>
-                  <h3 class="scenario-title">SNS Facebook 個別3日間シナリオ 2025-10-15</h3>
-                  <p class="scenario-copy">2026年3月9日時点で送信待ち 70人 / 対象メール 3通 / 確認ページ 3ページ</p>
-                </div>
-                <div class="scenario-badges">
-                  <span class="badge"><span class="badge-dot"></span>Mailchimp</span>
-                  <span class="badge"><span class="badge-dot"></span>UTAGE</span>
-                  <span class="badge"><span class="badge-dot"></span>LINE</span>
-                </div>
-              </div>
-              <p class="scenario-path">UTAGE上の場所: SNS：メインファネル_Meta広告 / センサーズ_ロードマップ作成会（FV変更）系ページ</p>
-              <div class="repair-grid">
-                <article class="repair-card">
-                  <div class="repair-card-head">
-                    <strong>センサーズFB広告_個別3日間シナリオ_1通目ABテストB</strong>
-                    <span class="wait-pill">送信待ち 1人</span>
+            <details class="scenario-panel scenario-sns" id="scenario-sns" open>
+              <summary>
+                <div class="scenario-head">
+                  <div>
+                    <p class="scenario-kicker">Mailchimp シナリオ</p>
+                    <h3 class="scenario-title">SNS Facebook 個別3日間シナリオ 2025-10-15</h3>
+                    <p class="scenario-copy">2026年3月9日時点で送信待ち 70人 / 対象メール 3通 / 確認ページ 3ページ</p>
                   </div>
-                  <div class="detail-list">
-                    <div class="detail-row">
-                      <div class="detail-label">メール内の設置場所</div>
-                      <div class="detail-value">
-                        <p>画像をタップすると遷移します。</p>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">UTAGEページ</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card">
-                            <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 1通目ページ</span>
-                            <a class="link-url" href="https://school.addness.co.jp/page/vQ8ZuYjSpxuh" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/vQ8ZuYjSpxuh</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">間違っているリンク</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-warn">
-                            <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 1通目ページにあった 停止中LINE直リンク（みかみ）</span>
-                            <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">同じページで確認した short.io</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-ok">
-                            <span class="link-label">SNS Facebook ABテストB 1通目LINE誘導 short.io</span>
-                            <a class="link-url" href="https://skill.addness.co.jp/oFZWbR" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/oFZWbR</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="scenario-badges">
+                    <span class="badge"><span class="badge-dot"></span>Mailchimp</span>
+                    <span class="badge"><span class="badge-dot"></span>UTAGE</span>
+                    <span class="badge"><span class="badge-dot"></span>LINE</span>
                   </div>
-                </article>
+                </div>
+              </summary>
+              <div class="scenario-body">
+                <p class="scenario-path">UTAGE上の場所: SNS：メインファネル_Meta広告 / センサーズ_ロードマップ作成会（FV変更）系ページ</p>
+                <div class="repair-grid">
+                  <article class="repair-card">
+                    <div class="repair-card-head">
+                      <strong>センサーズFB広告_個別3日間シナリオ_1通目ABテストB</strong>
+                      <span class="wait-pill">送信待ち 1人</span>
+                    </div>
+                    <div class="detail-list">
+                      <div class="detail-row">
+                        <div class="detail-label">メール内の設置場所</div>
+                        <div class="detail-value">
+                          <p>画像をタップすると遷移します。</p>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">UTAGEページ</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card">
+                              <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 1通目ページ</span>
+                              <a class="link-url" href="https://school.addness.co.jp/page/vQ8ZuYjSpxuh" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/vQ8ZuYjSpxuh</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">間違っているリンク</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-warn">
+                              <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 1通目ページにあった 停止中LINE直リンク（みかみ）</span>
+                              <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">同じページで確認した short.io</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-ok">
+                              <span class="link-label">SNS Facebook ABテストB 1通目LINE誘導 short.io</span>
+                              <a class="link-url" href="https://skill.addness.co.jp/oFZWbR" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/oFZWbR</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
 
-                <article class="repair-card">
-                  <div class="repair-card-head">
-                    <strong>個別３日間シナリオ2通目-ABテストA</strong>
-                    <span class="wait-pill">送信待ち 67人</span>
-                  </div>
-                  <div class="detail-list">
-                    <div class="detail-row">
-                      <div class="detail-label">メール内の設置場所</div>
-                      <div class="detail-value">
-                        <p>ボタンと画像の両方から遷移します。</p>
-                      </div>
+                  <article class="repair-card">
+                    <div class="repair-card-head">
+                      <strong>個別３日間シナリオ2通目-ABテストA</strong>
+                      <span class="wait-pill">送信待ち 67人</span>
                     </div>
-                    <div class="detail-row">
-                      <div class="detail-label">UTAGEページ</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card">
-                            <span class="link-label">SNSロードマップ作成会 Facebook ABテストA 2通目ページ</span>
-                            <a class="link-url" href="https://school.addness.co.jp/page/fksI4L8hNu4E?ftid=a2D07pvYFVvN" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/fksI4L8hNu4E?ftid=a2D07pvYFVvN</a>
+                    <div class="detail-list">
+                      <div class="detail-row">
+                        <div class="detail-label">メール内の設置場所</div>
+                        <div class="detail-value">
+                          <p>ボタンと画像の両方から遷移します。</p>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">UTAGEページ</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card">
+                              <span class="link-label">SNSロードマップ作成会 Facebook ABテストA 2通目ページ</span>
+                              <a class="link-url" href="https://school.addness.co.jp/page/fksI4L8hNu4E?ftid=a2D07pvYFVvN" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/fksI4L8hNu4E?ftid=a2D07pvYFVvN</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">間違っているリンク</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-warn">
+                              <span class="link-label">SNSロードマップ作成会 Facebook ABテストA 2通目ページにあった 停止中LINE直リンク（みかみ）</span>
+                              <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=QBbEoM&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=QBbEoM&amp;liff_id=2003793581-w9y6NG72</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">同じページで確認した short.io</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-ok">
+                              <span class="link-label">SNS Facebook 2通目LINE誘導 short.io</span>
+                              <a class="link-url" href="https://skill.addness.co.jp/9lhTJx" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/9lhTJx</a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="detail-row">
-                      <div class="detail-label">間違っているリンク</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-warn">
-                            <span class="link-label">SNSロードマップ作成会 Facebook ABテストA 2通目ページにあった 停止中LINE直リンク（みかみ）</span>
-                            <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=QBbEoM&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=QBbEoM&amp;liff_id=2003793581-w9y6NG72</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">同じページで確認した short.io</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-ok">
-                            <span class="link-label">SNS Facebook 2通目LINE誘導 short.io</span>
-                            <a class="link-url" href="https://skill.addness.co.jp/9lhTJx" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/9lhTJx</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+                  </article>
 
-                <article class="repair-card">
-                  <div class="repair-card-head">
-                    <strong>個別３日間シナリオ3通目ABテストB</strong>
-                    <span class="wait-pill">送信待ち 2人</span>
-                  </div>
-                  <div class="detail-list">
-                    <div class="detail-row">
-                      <div class="detail-label">メール内の設置場所</div>
-                      <div class="detail-value">
-                        <p>テキストと画像の両方から遷移します。</p>
-                      </div>
+                  <article class="repair-card">
+                    <div class="repair-card-head">
+                      <strong>個別３日間シナリオ3通目ABテストB</strong>
+                      <span class="wait-pill">送信待ち 2人</span>
                     </div>
-                    <div class="detail-row">
-                      <div class="detail-label">UTAGEページ</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card">
-                            <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 3通目ページ</span>
-                            <a class="link-url" href="https://school.addness.co.jp/page/bbwZzf9MxRUb" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/bbwZzf9MxRUb</a>
+                    <div class="detail-list">
+                      <div class="detail-row">
+                        <div class="detail-label">メール内の設置場所</div>
+                        <div class="detail-value">
+                          <p>テキストと画像の両方から遷移します。</p>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">UTAGEページ</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card">
+                              <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 3通目ページ</span>
+                              <a class="link-url" href="https://school.addness.co.jp/page/bbwZzf9MxRUb" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/bbwZzf9MxRUb</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">間違っているリンク</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-warn">
+                              <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 3通目ページにあった 停止中LINE直リンク（みかみ）</span>
+                              <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">同じページで確認した short.io</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-ok">
+                              <span class="link-label">SNS Facebook ABテストB 3通目LINE誘導 short.io</span>
+                              <a class="link-url" href="https://skill.addness.co.jp/kVOFxL" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/kVOFxL</a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="detail-row">
-                      <div class="detail-label">間違っているリンク</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-warn">
-                            <span class="link-label">SNSロードマップ作成会 Facebook ABテストB 3通目ページにあった 停止中LINE直リンク（みかみ）</span>
-                            <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">同じページで確認した short.io</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-ok">
-                            <span class="link-label">SNS Facebook ABテストB 3通目LINE誘導 short.io</span>
-                            <a class="link-url" href="https://skill.addness.co.jp/kVOFxL" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/kVOFxL</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+                  </article>
+                </div>
               </div>
-            </article>
+            </details>
 
-            <article class="scenario-panel">
-              <div class="scenario-head">
-                <div>
-                  <p class="scenario-kicker">Mailchimp シナリオ</p>
-                  <h3 class="scenario-title">AI X 個別3日間シナリオ</h3>
-                  <p class="scenario-copy">2026年3月9日時点で送信待ち 1人 / 対象メール 1通 / 確認ページ 2ページ</p>
+            <details class="scenario-panel scenario-aix" id="scenario-aix">
+              <summary>
+                <div class="scenario-head">
+                  <div>
+                    <p class="scenario-kicker">Mailchimp シナリオ</p>
+                    <h3 class="scenario-title">AI X 個別3日間シナリオ</h3>
+                    <p class="scenario-copy">2026年3月9日時点で送信待ち 1人 / 対象メール 1通 / 確認ページ 2ページ</p>
+                  </div>
+                  <div class="scenario-badges">
+                    <span class="badge"><span class="badge-dot"></span>Mailchimp</span>
+                    <span class="badge"><span class="badge-dot"></span>UTAGE</span>
+                    <span class="badge"><span class="badge-dot"></span>LINE</span>
+                  </div>
                 </div>
-                <div class="scenario-badges">
-                  <span class="badge"><span class="badge-dot"></span>Mailchimp</span>
-                  <span class="badge"><span class="badge-dot"></span>UTAGE</span>
-                  <span class="badge"><span class="badge-dot"></span>LINE</span>
+              </summary>
+              <div class="scenario-body">
+                <p class="scenario-path">UTAGE上の場所: AI：メインファネル_Meta広告 / AIロードマップ作成会_FV変更 系ページ</p>
+                <div class="repair-grid">
+                  <article class="repair-card">
+                    <div class="repair-card-head">
+                      <strong>AIカレッジX広告_個別3日間シナリオ_2日目</strong>
+                      <span class="wait-pill">送信待ち 1人</span>
+                    </div>
+                    <div class="detail-list">
+                      <div class="detail-row">
+                        <div class="detail-label">メール内の設置場所</div>
+                        <div class="detail-value">
+                          <p>画像からはメインページへ、ボタンと画像からは 2通目ページへ遷移します。</p>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">UTAGEページ</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card">
+                              <span class="link-label">AIロードマップ作成会 X用メインページ</span>
+                              <a class="link-url" href="https://school.addness.co.jp/p/XcFB1Re3138v" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/p/XcFB1Re3138v</a>
+                            </div>
+                            <div class="link-card">
+                              <span class="link-label">AIロードマップ作成会 X用 2通目ページ</span>
+                              <a class="link-url" href="https://school.addness.co.jp/page/1zIgM0ov1N6l" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/1zIgM0ov1N6l</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">間違っているリンク</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-warn">
+                              <span class="link-label">どちらのページにも残っていた 停止中LINE直リンク（みかみ）</span>
+                              <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">同じページで確認した short.io</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-ok">
+                              <span class="link-label">AI X メインLINE誘導 short.io</span>
+                              <a class="link-url" href="https://skill.addness.co.jp/xad-ai3" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/xad-ai3</a>
+                            </div>
+                            <div class="link-card is-ok">
+                              <span class="link-label">AI X 2通目LINE誘導 short.io</span>
+                              <a class="link-url" href="https://skill.addness.co.jp/s1KcsS" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/s1KcsS</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
                 </div>
               </div>
-              <p class="scenario-path">UTAGE上の場所: AI：メインファネル_Meta広告 / AIロードマップ作成会_FV変更 系ページ</p>
-              <div class="repair-grid">
-                <article class="repair-card">
-                  <div class="repair-card-head">
-                    <strong>AIカレッジX広告_個別3日間シナリオ_2日目</strong>
-                    <span class="wait-pill">送信待ち 1人</span>
-                  </div>
-                  <div class="detail-list">
-                    <div class="detail-row">
-                      <div class="detail-label">メール内の設置場所</div>
-                      <div class="detail-value">
-                        <p>画像からはメインページへ、ボタンと画像からは 2通目ページへ遷移します。</p>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">UTAGEページ</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card">
-                            <span class="link-label">AIロードマップ作成会 X用メインページ</span>
-                            <a class="link-url" href="https://school.addness.co.jp/p/XcFB1Re3138v" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/p/XcFB1Re3138v</a>
-                          </div>
-                          <div class="link-card">
-                            <span class="link-label">AIロードマップ作成会 X用 2通目ページ</span>
-                            <a class="link-url" href="https://school.addness.co.jp/page/1zIgM0ov1N6l" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/page/1zIgM0ov1N6l</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">間違っているリンク</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-warn">
-                            <span class="link-label">どちらのページにも残っていた 停止中LINE直リンク（みかみ）</span>
-                            <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">同じページで確認した short.io</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-ok">
-                            <span class="link-label">AI X メインLINE誘導 short.io</span>
-                            <a class="link-url" href="https://skill.addness.co.jp/xad-ai3" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/xad-ai3</a>
-                          </div>
-                          <div class="link-card is-ok">
-                            <span class="link-label">AI X 2通目LINE誘導 short.io</span>
-                            <a class="link-url" href="https://skill.addness.co.jp/s1KcsS" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/s1KcsS</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </article>
+            </details>
 
-            <article class="scenario-panel">
-              <div class="scenario-head">
-                <div>
-                  <p class="scenario-kicker">Mailchimp シナリオ</p>
-                  <h3 class="scenario-title">AI Facebook 個別3日間シナリオ</h3>
-                  <p class="scenario-copy">2026年3月9日時点で送信待ち 1人 / 対象メール 1通 / 確認ページ 1ページ</p>
+            <details class="scenario-panel scenario-aifb" id="scenario-aifb">
+              <summary>
+                <div class="scenario-head">
+                  <div>
+                    <p class="scenario-kicker">Mailchimp シナリオ</p>
+                    <h3 class="scenario-title">AI Facebook 個別3日間シナリオ</h3>
+                    <p class="scenario-copy">2026年3月9日時点で送信待ち 1人 / 対象メール 1通 / 確認ページ 1ページ</p>
+                  </div>
+                  <div class="scenario-badges">
+                    <span class="badge"><span class="badge-dot"></span>Mailchimp</span>
+                    <span class="badge"><span class="badge-dot"></span>UTAGE</span>
+                    <span class="badge"><span class="badge-dot"></span>LINE</span>
+                  </div>
                 </div>
-                <div class="scenario-badges">
-                  <span class="badge"><span class="badge-dot"></span>Mailchimp</span>
-                  <span class="badge"><span class="badge-dot"></span>UTAGE</span>
-                  <span class="badge"><span class="badge-dot"></span>LINE</span>
+              </summary>
+              <div class="scenario-body">
+                <p class="scenario-path">UTAGE上の場所: AI：メインファネル_Meta広告 / AIロードマップ作成会_FV変更 系ページ</p>
+                <div class="repair-grid">
+                  <article class="repair-card">
+                    <div class="repair-card-head">
+                      <strong>AIカレッジFB広告_個別3日間シナリオ_2日目</strong>
+                      <span class="wait-pill">送信待ち 1人</span>
+                    </div>
+                    <div class="detail-list">
+                      <div class="detail-row">
+                        <div class="detail-label">メール内の設置場所</div>
+                        <div class="detail-value">
+                          <p>画像とボタンの両方から遷移します。</p>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">UTAGEページ</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card">
+                              <span class="link-label">AIロードマップ作成会 メインページ</span>
+                              <a class="link-url" href="https://school.addness.co.jp/p/uUfErKGsQYZ2?ftid=eXgykfkQawhf" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/p/uUfErKGsQYZ2?ftid=eXgykfkQawhf</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">間違っているリンク</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-warn">
+                              <span class="link-label">AIロードマップ作成会 メインページにあった 停止中LINE直リンク（みかみ）</span>
+                              <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-row">
+                        <div class="detail-label">同じページで確認した short.io</div>
+                        <div class="detail-value">
+                          <div class="link-stack">
+                            <div class="link-card is-ok">
+                              <span class="link-label">AI Facebook メインLINE誘導 short.io</span>
+                              <a class="link-url" href="https://skill.addness.co.jp/meta-ai3" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/meta-ai3</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
                 </div>
               </div>
-              <p class="scenario-path">UTAGE上の場所: AI：メインファネル_Meta広告 / AIロードマップ作成会_FV変更 系ページ</p>
-              <div class="repair-grid">
-                <article class="repair-card">
-                  <div class="repair-card-head">
-                    <strong>AIカレッジFB広告_個別3日間シナリオ_2日目</strong>
-                    <span class="wait-pill">送信待ち 1人</span>
-                  </div>
-                  <div class="detail-list">
-                    <div class="detail-row">
-                      <div class="detail-label">メール内の設置場所</div>
-                      <div class="detail-value">
-                        <p>画像とボタンの両方から遷移します。</p>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">UTAGEページ</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card">
-                            <span class="link-label">AIロードマップ作成会 メインページ</span>
-                            <a class="link-url" href="https://school.addness.co.jp/p/uUfErKGsQYZ2?ftid=eXgykfkQawhf" target="_blank" rel="noopener noreferrer">https://school.addness.co.jp/p/uUfErKGsQYZ2?ftid=eXgykfkQawhf</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">間違っているリンク</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-warn">
-                            <span class="link-label">AIロードマップ作成会 メインページにあった 停止中LINE直リンク（みかみ）</span>
-                            <a class="link-url" href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" target="_blank" rel="noopener noreferrer">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="detail-row">
-                      <div class="detail-label">同じページで確認した short.io</div>
-                      <div class="detail-value">
-                        <div class="link-stack">
-                          <div class="link-card is-ok">
-                            <span class="link-label">AI Facebook メインLINE誘導 short.io</span>
-                            <a class="link-url" href="https://skill.addness.co.jp/meta-ai3" target="_blank" rel="noopener noreferrer">https://skill.addness.co.jp/meta-ai3</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </article>
+            </details>
           </div>
         </div>
       </section>
 
-      <section class="surface block" id="actions">
+      <section class="surface block block-tone-blue" id="actions">
         <div class="block-head">
           <div class="block-head-row">
             <div>
@@ -1497,7 +1846,7 @@
         </div>
       </section>
 
-      <section class="surface block start-collapsed" id="method">
+      <section class="surface block block-tone-plain start-collapsed" id="method">
         <div class="block-head">
           <div class="block-head-row">
             <div>
@@ -1550,7 +1899,7 @@
         </div>
       </section>
 
-      <section class="surface block start-collapsed" id="evidence">
+      <section class="surface block block-tone-soft start-collapsed" id="evidence">
         <div class="block-head">
           <div class="block-head-row">
             <div>
@@ -1599,15 +1948,11 @@
   <script>
     const navShell = document.getElementById("page-nav");
     const navToggle = document.getElementById("nav-toggle");
-    const navToggleLabel = document.getElementById("nav-toggle-label");
 
     if (navToggle && navShell) {
       navToggle.addEventListener("click", () => {
         const isOpen = navShell.classList.toggle("is-open");
         navToggle.setAttribute("aria-expanded", String(isOpen));
-        if (navToggleLabel) {
-          navToggleLabel.textContent = isOpen ? "目次を閉じる" : "目次を開く";
-        }
       });
     }
 
@@ -1619,9 +1964,15 @@
 
     const openTarget = (target, scroll = true) => {
       if (!target) return;
+      if (target.tagName === "DETAILS") {
+        target.open = true;
+      }
       revealBlock(target);
       let parent = target.parentElement;
       while (parent) {
+        if (parent.tagName === "DETAILS") {
+          parent.open = true;
+        }
         if (parent.classList && parent.classList.contains("block")) {
           parent.classList.remove("is-collapsed");
         }
@@ -1654,9 +2005,6 @@
           navShell.classList.remove("is-open");
           if (navToggle) {
             navToggle.setAttribute("aria-expanded", "false");
-            if (navToggleLabel) {
-              navToggleLabel.textContent = "目次を開く";
-            }
           }
         }
         history.replaceState(null, "", `#${id}`);
@@ -1671,6 +2019,62 @@
 
     window.addEventListener("hashchange", openHashTarget);
     openHashTarget();
+
+    document.querySelectorAll(".link-card").forEach((card) => {
+      const link = card.querySelector(".link-url");
+      if (!link) return;
+      const actions = document.createElement("div");
+      actions.className = "link-actions";
+
+      const openLink = document.createElement("a");
+      openLink.className = "link-action";
+      openLink.href = link.href;
+      openLink.target = "_blank";
+      openLink.rel = "noopener noreferrer";
+      openLink.textContent = "開く";
+
+      const copyButton = document.createElement("button");
+      copyButton.type = "button";
+      copyButton.className = "link-action is-secondary";
+      copyButton.textContent = "コピー";
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(link.href);
+          copyButton.textContent = "コピー済み";
+          window.setTimeout(() => {
+            copyButton.textContent = "コピー";
+          }, 1400);
+        } catch (error) {
+          copyButton.textContent = "失敗";
+          window.setTimeout(() => {
+            copyButton.textContent = "コピー";
+          }, 1400);
+        }
+      });
+
+      actions.append(openLink, copyButton);
+      card.append(actions);
+    });
+
+    const revealTargets = document.querySelectorAll(".block, .jump-card, .scenario-panel");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -6% 0px" });
+
+    revealTargets.forEach((element) => {
+      element.classList.add("reveal-up");
+      const rect = element.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        element.classList.add("is-visible");
+      } else {
+        revealObserver.observe(element);
+      }
+    });
   </script>
 </body>
 </html>
