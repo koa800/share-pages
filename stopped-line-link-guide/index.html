@@ -2325,7 +2325,11 @@
     const openHashTarget = () => {
       const id = decodeURIComponent(window.location.hash.replace("#", ""));
       if (!id) return;
-      openTarget(document.getElementById(id), false);
+      const target = document.getElementById(id);
+      if (!target) return;
+      window.setTimeout(() => {
+        openTarget(target, true);
+      }, 60);
     };
 
     window.addEventListener("hashchange", openHashTarget);
