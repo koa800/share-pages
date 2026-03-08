@@ -20,11 +20,18 @@
       --ok: #176245;
       --ok-soft: #edf8f1;
       --shadow: 0 18px 42px rgba(19, 29, 21, 0.06);
+      --ink-deep: #13251a;
+      --surface-dark: #183026;
+      --surface-dark-2: #20392d;
+      --surface-ivory: #fffdf9;
+      --surface-warm: #f8efe4;
+      --surface-green: #edf6f1;
+      --text-inverse: #f4f8f2;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 16px 14px 40px;
+      padding: 16px 14px 96px;
       color: var(--text);
       background:
         radial-gradient(circle at top left, rgba(31, 106, 74, 0.08), transparent 34%),
@@ -80,6 +87,93 @@
       border:1px solid var(--line);
       font-size:13px;
       color:var(--muted);
+    }
+    .service-flow {
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .service-node {
+      display:grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 12px;
+      align-items:center;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.8);
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display:grid;
+      place-items:center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.02em;
+    }
+    .service-node strong {
+      display:block;
+      margin-bottom: 4px;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+    .service-node span {
+      display:block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .service-node.is-mailchimp .service-icon {
+      background: linear-gradient(135deg, #272b2c, #4d6361);
+    }
+    .service-node.is-utage .service-icon {
+      background: linear-gradient(135deg, #f28d2f, #f6bf6e);
+      color: #2f210b;
+    }
+    .service-node.is-line .service-icon {
+      background: linear-gradient(135deg, #07b53b, #4fd46d);
+    }
+    .service-arrow {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .priority-grid {
+      display:grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .priority-card {
+      padding: 15px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .priority-card strong {
+      display:block;
+      margin-bottom: 6px;
+      font-size: 17px;
+      line-height: 1.35;
+      letter-spacing: -.02em;
+    }
+    .priority-card p:last-child { margin-bottom: 0; }
+    .priority-card.is-alert {
+      background: var(--warn-soft);
+      border-color: rgba(180,35,24,.16);
+    }
+    .priority-card.is-good {
+      background: var(--ok-soft);
+      border-color: rgba(15,107,67,.14);
+    }
+    .priority-card.is-note {
+      background: #f8faf6;
     }
     .toc-grid { display:grid; grid-template-columns:1fr; gap:10px; margin-top:14px; }
     .toc button {
@@ -279,7 +373,7 @@
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: rgba(255, 255, 255, 0.84);
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,250,245,.92));
     }
     .hero-note p:last-child { margin-bottom: 0; }
     .stat-grid {
@@ -292,8 +386,21 @@
       padding: 18px 16px;
       border: 1px solid var(--line);
       border-radius: 24px;
-      background: rgba(255, 255, 255, 0.84);
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(249,251,246,.92));
       box-shadow: var(--shadow);
+    }
+    .stat-card.is-alert {
+      background: linear-gradient(180deg, #fff5ef, #fffaf7);
+      border-color: rgba(180,35,24,.15);
+    }
+    .stat-card.is-dark {
+      background: linear-gradient(180deg, #1b3328, #1f392d);
+      border-color: rgba(255,255,255,.08);
+    }
+    .stat-card.is-dark .stat-label,
+    .stat-card.is-dark .stat-copy,
+    .stat-card.is-dark .stat-value {
+      color: var(--text-inverse);
     }
     .stat-label {
       margin: 0 0 12px;
@@ -319,6 +426,42 @@
     }
     .block {
       padding: 22px 20px;
+    }
+    .surface-dark {
+      background: linear-gradient(180deg, var(--surface-dark), var(--surface-dark-2));
+      border-color: rgba(255,255,255,.06);
+    }
+    .surface-dark .kicker,
+    .surface-dark .block-title,
+    .surface-dark .block-desc,
+    .surface-dark .callout,
+    .surface-dark p,
+    .surface-dark li,
+    .surface-dark strong,
+    .surface-dark .section-note {
+      color: var(--text-inverse);
+    }
+    .surface-dark .callout,
+    .surface-dark .panel,
+    .surface-dark .rule-box,
+    .surface-dark .rule-item {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.08);
+    }
+    .surface-dark .warn-panel {
+      background: rgba(184,64,36,.18);
+      border-color: rgba(255,189,166,.12);
+    }
+    .surface-dark .ok-panel {
+      background: rgba(23,98,69,.18);
+      border-color: rgba(181,232,208,.12);
+    }
+    .surface-dark .warn { color: #ffb69d; }
+    .surface-accent {
+      background: linear-gradient(180deg, #edf6f1, #f8fbf8);
+    }
+    .surface-warm {
+      background: linear-gradient(180deg, #fffdf9, #f8efe4);
     }
     .block-head {
       display: flex;
@@ -419,6 +562,52 @@
       line-height: 1.4;
     }
     .flow-card p:last-child { margin-bottom: 0; }
+    .issue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .issue-card {
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+    }
+    .issue-card strong {
+      display:block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .issue-card p:last-child { margin-bottom: 0; }
+    .tag-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f7faf6;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      display:inline-block;
+    }
+    .tag.mailchimp .tag-dot { background:#3f5956; }
+    .tag.utage .tag-dot { background:#f0a444; }
+    .tag.line .tag-dot { background:#0db548; }
     .block-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
@@ -437,6 +626,13 @@
       border: 1px solid var(--line);
       border-radius: 22px;
       background: #fff;
+    }
+    .step-card .step-meta {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
     }
     .step-index {
       display: grid;
@@ -554,6 +750,36 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
     }
+    .mobile-dock {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 30;
+      display: none;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid rgba(23,34,24,.08);
+      border-radius: 22px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 40px rgba(18,31,22,.14);
+    }
+    .mobile-dock a {
+      display:grid;
+      place-items:center;
+      min-height: 48px;
+      padding: 8px 6px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.35;
+    }
     #issues .details-body { overflow-x:auto; }
     #issues table { min-width: 640px; }
     .journey-block .details-body { overflow-x:auto; }
@@ -595,18 +821,21 @@
     }
     @media (max-width: 1080px) {
       .page { grid-template-columns: 1fr; }
-      .sidebar {
-        position: static;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
+      .sidebar { display:none; }
+      .mobile-dock { display:grid; }
     }
     @media (min-width: 740px) {
-      body { padding: 22px 20px 56px; font-size:16px; }
+      body { padding: 22px 20px 72px; font-size:16px; }
       .toc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .hero { padding: 32px 28px; }
       .toc { padding: 22px 22px; }
       .details-body { padding: 24px; }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .service-flow {
+        grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr) 26px minmax(0, 1fr);
+        align-items: stretch;
+      }
+      .priority-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (min-width: 980px) {
       .toc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -634,46 +863,82 @@
 <main class="content">
 <section class="hero surface">
 <div class="hero-grid">
-<div>
+<div class="hero-main">
 <p class="eyebrow">共有・修正用メモ</p>
 <h1>停止中のLINE誤接続を、迷わず直せる形に整理した文書です。</h1>
 <p class="lead">2026年3月9日時点で、Mailchimp で停止されておらず、まだ送信待ちの人が残っているメールだけを対象に、どのメールのどの場所にあるリンクが、どの UTAGE ページへ飛び、そのページのどの LINE リンクが問題なのかを、修正担当者が迷わず追える順序で整理しています。</p>
-<p class="hero-meta">最終更新: 2026-03-09</p>
 <div class="pill-row">
 <span class="pill">対象: 2026年3月9日時点で送信待ち件数が残っているメール</span>
 <span class="pill">対象外: 一時停止中のメール / 配信停止メール</span>
 <span class="pill">主問題: 停止中LINE直リンク</span>
 <span class="pill">運用原則: LINEリンクは必ず short.io</span>
 </div>
+<div class="service-flow" aria-label="誤接続が起きる流れ">
+<div class="service-node is-mailchimp">
+<div class="service-icon">MC</div>
+<div>
+<strong>Mailchimp</strong>
+<span>送信待ちが残っている現役メールだけを対象に確認しています。</span>
+</div>
+</div>
+<div class="service-arrow" aria-hidden="true">→</div>
+<div class="service-node is-utage">
+<div class="service-icon">UT</div>
+<div>
+<strong>UTAGE</strong>
+<span>メール内リンクの着地先ページに、誤ったLINE直リンクが残っています。</span>
+</div>
+</div>
+<div class="service-arrow" aria-hidden="true">→</div>
+<div class="service-node is-line">
+<div class="service-icon">LN</div>
+<div>
+<strong>LINE</strong>
+<span>停止中の「みかみ」へ飛ぶため、ここで誤接続が起きます。</span>
+</div>
+</div>
+</div>
+<p class="hero-meta">最終更新: 2026-03-09</p>
 </div>
 <div class="hero-note">
 <p class="kicker">30秒で要点</p>
-<p><strong>2026年3月9日時点で送信待ちが残っている 3 シナリオ・5 メール・6 ページ</strong>に、停止中の「みかみ」（ID: <code>@804mrsmd</code>）へ飛ぶ導線が残っています。</p>
-<p><strong>問題は Mailchimp ではなく、その先の UTAGE ページ内リンク</strong>です。メール本文のリンク先を開いたあとに誤接続が起きています。</p>
-<p><strong>直す場所は UTAGE ページ内の LINE リンク</strong>です。LINE 直リンクをなくし、正しい遷移先の short.io に差し替えます。</p>
+<div class="priority-grid">
+<div class="priority-card is-alert">
+<strong>今日直す対象は 3 シナリオ・5 メール・6 ページです。</strong>
+<p>今も送信待ちが残っているメールだけに絞っています。古い残骸は主対象から外しています。</p>
+</div>
+<div class="priority-card is-note">
+<strong>問題は Mailchimp ではなく、その先の UTAGE ページです。</strong>
+<p>メール本文のリンク先を開いたあと、UTAGE ページ内の LINE 直リンクで誤接続が起きています。</p>
+</div>
+<div class="priority-card is-good">
+<strong>直す場所は UTAGE ページ内の LINE リンクです。</strong>
+<p>停止中LINEへの直リンクを消し、正しい遷移先の short.io へ置き換えれば解消できます。</p>
+</div>
+</div>
 </div>
 </div>
 </section>
 <section aria-label="概要" class="stat-grid">
+<article class="stat-card is-alert">
+<p class="stat-label">送信待ち人数合計</p>
+<p class="stat-value">72</p>
+<p class="stat-copy">2026年3月9日時点で、この誤接続に触れる可能性がある送信待ち人数の合計です。</p>
+</article>
 <article class="stat-card">
 <p class="stat-label">対象シナリオ数</p>
 <p class="stat-value">3</p>
-<p class="stat-copy">送信待ち件数が残っている誤接続シナリオだけを残しています。</p>
+<p class="stat-copy">SNS Facebook、AI X、AI Facebook の3本だけを主対象にしています。</p>
 </article>
 <article class="stat-card">
 <p class="stat-label">対象メール数</p>
 <p class="stat-value">5</p>
 <p class="stat-copy">どのメールのどこを押すと問題ページに着地するかまで絞っています。</p>
 </article>
-<article class="stat-card">
-<p class="stat-label">対象UTAGEページ数</p>
-<p class="stat-value">6</p>
-<p class="stat-copy">いま直すべきページだけを残しています。</p>
-</article>
-<article class="stat-card">
-<p class="stat-label">停止中リンクの型</p>
-<p class="stat-value">2</p>
-<p class="stat-copy">停止中リンクは <code>lp=aYvC7j</code> と <code>lp=QBbEoM</code> の 2 種類を確認しています。</p>
+<article class="stat-card is-dark">
+<p class="stat-label">利用停止日</p>
+<p class="stat-value">2024-09-17</p>
+<p class="stat-copy">停止中の「みかみ」が利用停止になった日です。少なくともこの日以降は誤接続です。</p>
 </article>
 </section>
 <section class="surface block" id="purpose">
@@ -689,7 +954,7 @@
 <p class="section-note">技術上は、Mailchimp でメールが停止されておらず、<code>queue_count &gt; 0</code> が残っているものだけを対象にしています。</p>
 </div>
 </section>
-<section class="surface block" id="summary">
+<section class="surface surface-dark block" id="summary">
 <div class="block-head">
 <div>
 <p class="kicker">②結論</p>
@@ -714,7 +979,7 @@
 <p class="section-note">今回の修正対象は、2026年3月9日時点で実際に送信待ちが残っているメールだけです。</p>
 </div>
 </section>
-<section class="surface block" id="structure">
+<section class="surface surface-warm block" id="structure">
 <div class="block-head">
 <div>
 <p class="kicker">③具体的な問題点</p>
@@ -753,10 +1018,40 @@
 <p>下の 5 件だけ見れば、どのシナリオのどのメール内にある、どのページの、どのリンクが間違っているかを追えます。</p>
 <p class="section-note">UTAGE上の場所は、AI が <code>AI：メインファネル_Meta広告 / AIロードマップ作成会_FV変更 系ページ</code>、SNS が <code>SNS：メインファネル_Meta広告 / センサーズ_ロードマップ作成会（FV変更）系ページ</code> です。</p>
 </div>
+<div class="issue-grid">
+<article class="issue-card">
+<div class="tag-row">
+<span class="tag mailchimp"><span class="tag-dot"></span>Mailchimp</span>
+<span class="tag utage"><span class="tag-dot"></span>UTAGE</span>
+<span class="tag line"><span class="tag-dot"></span>LINE</span>
+</div>
+<strong>SNS Facebook 個別3日間 2025-10-15</strong>
+<p>3通のメールから3ページへ遷移し、ABテスト A/B の両方で停止中の「みかみ」への直リンクが残っています。</p>
+</article>
+<article class="issue-card">
+<div class="tag-row">
+<span class="tag mailchimp"><span class="tag-dot"></span>Mailchimp</span>
+<span class="tag utage"><span class="tag-dot"></span>UTAGE</span>
+<span class="tag line"><span class="tag-dot"></span>LINE</span>
+</div>
+<strong>AI X 個別3日間</strong>
+<p>1通のメールから2ページへ分岐し、メインページと2通目ページの両方に同じ誤リンクが残っています。</p>
+</article>
+<article class="issue-card">
+<div class="tag-row">
+<span class="tag mailchimp"><span class="tag-dot"></span>Mailchimp</span>
+<span class="tag utage"><span class="tag-dot"></span>UTAGE</span>
+<span class="tag line"><span class="tag-dot"></span>LINE</span>
+</div>
+<strong>AI Facebook 個別3日間</strong>
+<p>1通のメールから開くメインページに、停止中の「みかみ」へ飛ぶ直リンクが残っています。</p>
+</article>
+</div>
 <div class="step-list">
 <div class="step-card">
 <div class="step-index">1</div>
 <div>
+<p class="step-meta">Mailchimpメール → UTAGEページ → LINEリンク</p>
 <strong>SNS Facebook 個別3日間シナリオ 2025-10-15 の「センサーズFB広告_個別3日間シナリオ_1通目ABテストB」</strong>
 <p>メール内では <strong>画像</strong> を押すと、UTAGE の <strong>SNSロードマップ作成会 Facebook ABテストB 1通目ページ</strong> が開きます。<a href="https://school.addness.co.jp/page/vQ8ZuYjSpxuh" rel="noopener noreferrer" target="_blank">https://school.addness.co.jp/page/vQ8ZuYjSpxuh</a></p>
 <p>このページ内に、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。<a href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" rel="noopener noreferrer" target="_blank">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a></p>
@@ -766,6 +1061,7 @@
 <div class="step-card">
 <div class="step-index">2</div>
 <div>
+<p class="step-meta">Mailchimpメール → UTAGEページ → LINEリンク</p>
 <strong>SNS Facebook 個別3日間シナリオ 2025-10-15 の「個別３日間シナリオ2通目-ABテストA」</strong>
 <p>メール内では <strong>ボタンと画像</strong> を押すと、UTAGE の <strong>SNSロードマップ作成会 Facebook ABテストA 2通目ページ</strong> が開きます。<a href="https://school.addness.co.jp/page/fksI4L8hNu4E?ftid=a2D07pvYFVvN" rel="noopener noreferrer" target="_blank">https://school.addness.co.jp/page/fksI4L8hNu4E?ftid=a2D07pvYFVvN</a></p>
 <p>このページ内に、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。<a href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=QBbEoM&amp;liff_id=2003793581-w9y6NG72" rel="noopener noreferrer" target="_blank">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=QBbEoM&amp;liff_id=2003793581-w9y6NG72</a></p>
@@ -775,6 +1071,7 @@
 <div class="step-card">
 <div class="step-index">3</div>
 <div>
+<p class="step-meta">Mailchimpメール → UTAGEページ → LINEリンク</p>
 <strong>SNS Facebook 個別3日間シナリオ 2025-10-15 の「個別３日間シナリオ3通目ABテストB」</strong>
 <p>メール内では <strong>テキストと画像</strong> を押すと、UTAGE の <strong>SNSロードマップ作成会 Facebook ABテストB 3通目ページ</strong> が開きます。<a href="https://school.addness.co.jp/page/bbwZzf9MxRUb" rel="noopener noreferrer" target="_blank">https://school.addness.co.jp/page/bbwZzf9MxRUb</a></p>
 <p>このページ内に、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。<a href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" rel="noopener noreferrer" target="_blank">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a></p>
@@ -784,6 +1081,7 @@
 <div class="step-card">
 <div class="step-index">4</div>
 <div>
+<p class="step-meta">Mailchimpメール → UTAGEページ → LINEリンク</p>
 <strong>AI X 個別3日間シナリオの「AIカレッジX広告_個別3日間シナリオ_2日目」</strong>
 <p>メール内では <strong>画像</strong> を押すと、UTAGE の <strong>AIロードマップ作成会 X用メインページ</strong> が開きます。<a href="https://school.addness.co.jp/p/XcFB1Re3138v" rel="noopener noreferrer" target="_blank">https://school.addness.co.jp/p/XcFB1Re3138v</a></p>
 <p>同じメールの <strong>ボタンと画像</strong> からは、UTAGE の <strong>AIロードマップ作成会 X用 2通目ページ</strong> が開きます。<a href="https://school.addness.co.jp/page/1zIgM0ov1N6l" rel="noopener noreferrer" target="_blank">https://school.addness.co.jp/page/1zIgM0ov1N6l</a></p>
@@ -794,6 +1092,7 @@
 <div class="step-card">
 <div class="step-index">5</div>
 <div>
+<p class="step-meta">Mailchimpメール → UTAGEページ → LINEリンク</p>
 <strong>AI Facebook 個別3日間シナリオの「AIカレッジFB広告_個別3日間シナリオ_2日目」</strong>
 <p>メール内では <strong>画像とボタン</strong> を押すと、UTAGE の <strong>AIロードマップ作成会 メインページ</strong> が開きます。<a href="https://school.addness.co.jp/p/uUfErKGsQYZ2?ftid=eXgykfkQawhf" rel="noopener noreferrer" target="_blank">https://school.addness.co.jp/p/uUfErKGsQYZ2?ftid=eXgykfkQawhf</a></p>
 <p>このページ内に、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。<a href="https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72" rel="noopener noreferrer" target="_blank">https://liff.line.me/2003793581-w9y6NG72/landing?follow=%40804mrsmd&amp;lp=aYvC7j&amp;liff_id=2003793581-w9y6NG72</a></p>
@@ -805,38 +1104,8 @@
 <p><strong>影響範囲</strong></p>
 <p>今回の誤接続は、AI と SNS の個別3日間シナリオで確認されました。7桁オプトイン本線では、今回と同じ停止中LINE誤接続は確認されていません。</p>
 </div>
-<table>
-<thead>
-<tr>
-<th>対象導線</th>
-<th>対象メール数</th>
-<th>対象UTAGEページ数</th>
-<th>起きている問題</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AI Facebook 個別3日間</td>
-<td>1通</td>
-<td>1ページ</td>
-<td>メールの遷移先ページに、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</td>
-</tr>
-<tr>
-<td>AI X 個別3日間</td>
-<td>1通</td>
-<td>2ページ</td>
-<td>同じメールから開く 2 ページの両方に、停止中の「みかみ」へ飛ぶ同じ LINE 直リンクが残っています。</td>
-</tr>
-<tr>
-<td>SNS Facebook 個別3日間 2025-10-15</td>
-<td>3通</td>
-<td>3ページ</td>
-<td>ABテスト A/B の現役ページに、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</td>
-</tr>
-</tbody>
-</table>
 </section>
-<section class="surface block" id="actions">
+<section class="surface surface-accent block" id="actions">
 <div class="block-head">
 <div>
 <p class="kicker">④具体的な改善アクション</p>
@@ -1118,6 +1387,12 @@
 </div>
 </section>
 </aside>
+<nav aria-label="モバイル用ショートカット" class="mobile-dock">
+<a href="#summary">② 結論</a>
+<a href="#structure">③ 問題点</a>
+<a href="#actions">④ 改善</a>
+<a href="#evidence">⑥ 根拠</a>
+</nav>
 </div>
 <script>
     const revealBlock = (target) => {
@@ -1182,7 +1457,7 @@
       });
     });
 
-    document.querySelectorAll('.side-nav a[href^="#"]').forEach((link) => {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
       link.addEventListener('click', (event) => {
         const id = link.getAttribute('href').slice(1);
         const target = document.getElementById(id);
