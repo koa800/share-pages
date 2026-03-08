@@ -7,39 +7,37 @@
 <title>停止中LINE誤接続 修正ガイド</title>
 <style>
     :root {
-      --bg: #f3f5ef;
-      --card: rgba(255, 253, 248, 0.96);
-      --line: #d7ded1;
-      --line-strong: #c5d0c1;
-      --text: #172218;
-      --muted: #5f6b61;
-      --accent: #1f6a4a;
-      --accent-soft: #edf6f1;
+      --bg: #f4f6f1;
+      --card: rgba(255, 253, 249, 0.98);
+      --line: #d9e0d6;
+      --line-strong: #c3cfc0;
+      --text: #132017;
+      --muted: #5e6c62;
+      --accent: #206746;
+      --accent-soft: #edf6f0;
+      --accent-soft-2: #f5faf7;
       --warn: #b84024;
-      --warn-soft: #fff4ee;
-      --ok: #176245;
-      --ok-soft: #edf8f1;
-      --shadow: 0 18px 42px rgba(19, 29, 21, 0.06);
-      --ink-deep: #13251a;
-      --surface-dark: #183026;
-      --surface-dark-2: #20392d;
+      --warn-soft: #fff3ec;
+      --ok: #1b6a49;
+      --ok-soft: #edf7f1;
+      --shadow: 0 18px 44px rgba(18, 28, 20, 0.06);
       --surface-ivory: #fffdf9;
-      --surface-warm: #f8efe4;
-      --surface-green: #edf6f1;
-      --text-inverse: #f4f8f2;
+      --surface-warm: #faf0e5;
+      --surface-green: #eef7f1;
+      --surface-soft: #f8faf6;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 16px 14px 96px;
+      padding: 18px 16px 96px;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(31, 106, 74, 0.08), transparent 34%),
-        radial-gradient(circle at top right, rgba(184, 64, 36, 0.06), transparent 26%),
-        linear-gradient(180deg, #f8f9f5 0%, var(--bg) 100%);
-      font: 15px/1.72 -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+        radial-gradient(circle at top left, rgba(32, 103, 70, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(184, 64, 36, 0.06), transparent 24%),
+        linear-gradient(180deg, #f9faf7 0%, var(--bg) 100%);
+      font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
     }
-    .wrap { max-width: 980px; margin: 0 auto; }
+    .wrap { max-width: 1180px; margin: 0 auto; }
     .topnav {
       position: sticky;
       top: 12px;
@@ -47,7 +45,7 @@
       margin-bottom: 16px;
     }
     .topnav-inner {
-      display: flex;
+      display: grid;
       gap: 8px;
       overflow-x: auto;
       padding: 10px;
@@ -60,16 +58,30 @@
     }
     .topnav-inner::-webkit-scrollbar { display:none; }
     .topnav a {
-      flex: 0 0 auto;
-      padding: 11px 16px;
+      min-width: 132px;
+      padding: 12px 16px;
       border-radius: 16px;
       border: 1px solid var(--line);
       background: #fff;
       color: var(--text);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       text-decoration: none;
       white-space: nowrap;
+      display: grid;
+      gap: 2px;
+      align-content: center;
+    }
+    .nav-index {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+    }
+    .nav-label {
+      line-height: 1.2;
     }
     .hero, .toc, details.section {
       background: var(--card);
@@ -79,7 +91,7 @@
       margin-bottom: 16px;
     }
     .hero {
-      padding: 24px 20px;
+      padding: 28px 22px;
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(251, 252, 248, 0.98)),
         linear-gradient(135deg, rgba(31, 106, 74, 0.08), rgba(255, 255, 255, 0));
@@ -400,15 +412,15 @@
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.9fr);
+      gap: 20px;
       align-items: start;
     }
     .hero-note {
-      padding: 18px;
+      padding: 20px;
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,250,245,.92));
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(246,250,244,.94));
     }
     .hero-note p:last-child { margin-bottom: 0; }
     .stat-grid {
@@ -418,7 +430,7 @@
       margin-bottom: 16px;
     }
     .stat-card {
-      padding: 18px 16px;
+      padding: 20px 18px;
       border: 1px solid var(--line);
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(249,251,246,.92));
@@ -429,13 +441,13 @@
       border-color: rgba(180,35,24,.15);
     }
     .stat-card.is-dark {
-      background: linear-gradient(180deg, #1b3328, #1f392d);
-      border-color: rgba(255,255,255,.08);
+      background: linear-gradient(180deg, #edf6f0, #f7fbf8);
+      border-color: rgba(32, 103, 70, .16);
     }
     .stat-card.is-dark .stat-label,
     .stat-card.is-dark .stat-copy,
     .stat-card.is-dark .stat-value {
-      color: var(--text-inverse);
+      color: var(--text);
     }
     .stat-label {
       margin: 0 0 12px;
@@ -460,7 +472,7 @@
       line-height: 1.6;
     }
     .block {
-      padding: 22px 20px;
+      padding: 28px 24px;
     }
     .surface-accent {
       background: linear-gradient(180deg, #edf6f1, #f8fbf8);
@@ -470,9 +482,12 @@
     }
     .block-head {
       position: relative;
-      display: block;
+      display: grid;
+      grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+      gap: 18px 28px;
+      align-items: start;
       padding-right: 56px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     .kicker {
       margin: 0 0 10px;
@@ -484,17 +499,18 @@
     }
     .block-title {
       margin: 0;
-      font-size: 26px;
+      font-size: 28px;
       line-height: 1.18;
       letter-spacing: -.03em;
     }
     .block-desc {
-      margin: 10px 0 0;
+      margin: 0;
       max-width: 760px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.7;
       text-align: left;
+      align-self: center;
     }
     .block-toggle {
       position: absolute;
@@ -620,8 +636,8 @@
     .tag.line .tag-dot { background:#0db548; }
     .block-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
-      gap: 14px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 18px;
       align-items: start;
     }
     .step-list {
@@ -702,7 +718,7 @@
     .issue-card p:last-child { margin-bottom: 0; }
     .process-grid {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
       margin-top: 16px;
     }
@@ -824,14 +840,10 @@
     }
     @media (min-width: 960px) {
       .topnav-inner {
-        justify-content: space-between;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
       }
       .topnav a {
-        flex: 1 1 0;
-        text-align: center;
-      }
-      .issue-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        min-width: 0;
       }
       .step-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -842,14 +854,36 @@
       details.journey-block > summary { padding: 20px 22px; padding-right: 72px; }
       details.journey-block > summary::after { right: 22px; top: 20px; }
     }
+    @media (max-width: 1180px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .flow-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 980px) {
+      .block-head {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .block-desc {
+        max-width: none;
+      }
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .issue-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     @media (max-width: 900px) {
       .hero-grid,
       .signal-grid,
       .block-grid,
-      .flow-grid,
-      .issue-grid,
-      .process-grid,
-      .stat-grid,
       .side-actions {
         grid-template-columns: 1fr;
       }
@@ -860,7 +894,21 @@
       }
       .topnav a {
         padding: 10px 12px;
-        font-size: 13px;
+        font-size: 14px;
+      }
+      .nav-index {
+        font-size: 10px;
+      }
+      .hero,
+      .block,
+      .toc {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+      .stat-grid,
+      .process-grid,
+      .flow-grid {
+        grid-template-columns: 1fr;
       }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -877,12 +925,12 @@
 <main class="content">
 <nav aria-label="ページ内ナビ" class="topnav">
 <div class="topnav-inner">
-<a href="#purpose">01 目的</a>
-<a href="#summary">02 結論</a>
-<a href="#structure">03 問題点</a>
-<a href="#actions">04 改善</a>
-<a href="#method">05 背景と確認</a>
-<a href="#evidence">06 根拠</a>
+<a href="#purpose"><span class="nav-index">01</span><span class="nav-label">目的</span></a>
+<a href="#summary"><span class="nav-index">02</span><span class="nav-label">結論</span></a>
+<a href="#structure"><span class="nav-index">03</span><span class="nav-label">問題点</span></a>
+<a href="#actions"><span class="nav-index">04</span><span class="nav-label">改善</span></a>
+<a href="#method"><span class="nav-index">05</span><span class="nav-label">背景と確認</span></a>
+<a href="#evidence"><span class="nav-index">06</span><span class="nav-label">根拠</span></a>
 </div>
 </nav>
 <section class="hero surface">
@@ -975,7 +1023,7 @@
 </div>
 <div class="callout">
 <p><strong>目的は、今も送信待ちが残っているメールの中で、停止中LINEに飛ぶ誤接続だけを特定し、修正担当者が迷わず差し替えられる状態にすること</strong>です。</p>
-<p class="section-note">技術上は、Mailchimp でメールが停止されておらず、<code>queue_count &gt; 0</code> が残っているものだけを対象にしています。</p>
+<p class="section-note">技術上は、Mailchimp 上でそのメールが停止されておらず、送信待ち人数が残っているものだけを対象にしています。</p>
 </div>
 </section>
 <section class="surface surface-accent block" id="summary">
@@ -994,7 +1042,7 @@
 </div>
 <div class="panel ok-panel">
 <p><strong>どこまで現役だと判断できたか</strong></p>
-<p>2026年3月9日時点で、Mailchimp 上で対象メールが停止されておらず、<code>queue_count</code> も残っていました。つまり、まだ送信待ちの対象者が残っています。</p>
+<p>2026年3月9日時点で、Mailchimp 上で対象メールが停止されておらず、送信待ち人数も残っていました。つまり、まだ送信待ちの対象者が残っています。</p>
 <p>一方で、7桁オプトイン本線にも送信待ちは残っていますが、今回の停止中LINE誤接続は確認されていません。</p>
 </div>
 </div>
@@ -1217,7 +1265,7 @@
 <li>同じページ内に short.io がある場合は、その short.io の向き先も確認する</li>
 <li>Lステップの停止中一覧で「みかみ」の利用停止日が 2024年9月17日であることを確認する</li>
 </ol>
-<p class="section-note">技術上は、Mailchimp の送信処理に残っている人数を表す <code>queue_count</code> が 0 より大きいかで確認しています。</p>
+<p class="section-note">技術上は、Mailchimp の送信待ち人数が 0 より大きいかで確認しています。</p>
 </div>
 </section>
 <section class="surface block" id="evidence">
