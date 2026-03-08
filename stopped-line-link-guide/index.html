@@ -61,13 +61,13 @@
     .topnav-inner::-webkit-scrollbar { display:none; }
     .topnav a {
       flex: 0 0 auto;
-      padding: 10px 14px;
+      padding: 11px 16px;
       border-radius: 16px;
       border: 1px solid var(--line);
       background: #fff;
       color: var(--text);
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 14px;
+      font-weight: 800;
       text-decoration: none;
       white-space: nowrap;
     }
@@ -200,6 +200,9 @@
       font-size: 17px;
       line-height: 1.35;
       letter-spacing: -.02em;
+    }
+    .priority-card p {
+      color: var(--text);
     }
     .priority-card p:last-child { margin-bottom: 0; }
     .priority-card.is-alert {
@@ -459,36 +462,6 @@
     .block {
       padding: 22px 20px;
     }
-    .surface-dark {
-      background: linear-gradient(180deg, var(--surface-dark), var(--surface-dark-2));
-      border-color: rgba(255,255,255,.06);
-    }
-    .surface-dark .kicker,
-    .surface-dark .block-title,
-    .surface-dark .block-desc,
-    .surface-dark .callout,
-    .surface-dark p,
-    .surface-dark li,
-    .surface-dark strong,
-    .surface-dark .section-note {
-      color: var(--text-inverse);
-    }
-    .surface-dark .callout,
-    .surface-dark .panel,
-    .surface-dark .rule-box,
-    .surface-dark .rule-item {
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.08);
-    }
-    .surface-dark .warn-panel {
-      background: rgba(184,64,36,.18);
-      border-color: rgba(255,189,166,.12);
-    }
-    .surface-dark .ok-panel {
-      background: rgba(23,98,69,.18);
-      border-color: rgba(181,232,208,.12);
-    }
-    .surface-dark .warn { color: #ffb69d; }
     .surface-accent {
       background: linear-gradient(180deg, #edf6f1, #f8fbf8);
     }
@@ -496,10 +469,9 @@
       background: linear-gradient(180deg, #fffdf9, #f8efe4);
     }
     .block-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
+      position: relative;
+      display: block;
+      padding-right: 56px;
       margin-bottom: 16px;
     }
     .kicker {
@@ -517,23 +489,29 @@
       letter-spacing: -.03em;
     }
     .block-desc {
-      max-width: 620px;
+      margin: 10px 0 0;
+      max-width: 760px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.7;
+      text-align: left;
     }
     .block-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 10px 8px 14px;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      padding: 0;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: #fff;
       color: var(--text);
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
+      font-size: 0;
+      line-height: 0;
     }
     .block-toggle::after {
       content: "+";
@@ -782,35 +760,15 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
     }
-    .mobile-dock {
-      position: fixed;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      z-index: 30;
-      display: none;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      padding: 10px;
-      border: 1px solid rgba(23,34,24,.08);
-      border-radius: 22px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 18px 40px rgba(18,31,22,.14);
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .55s ease, transform .55s ease;
+      will-change: opacity, transform;
     }
-    .mobile-dock a {
-      display:grid;
-      place-items:center;
-      min-height: 48px;
-      padding: 8px 6px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 800;
-      text-align: center;
-      line-height: 1.35;
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     #issues .details-body { overflow-x:auto; }
     #issues table { min-width: 640px; }
@@ -902,9 +860,15 @@
       }
       .topnav a {
         padding: 10px 12px;
-        font-size: 12px;
+        font-size: 13px;
       }
-      .mobile-dock { display:none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -913,12 +877,12 @@
 <main class="content">
 <nav aria-label="ページ内ナビ" class="topnav">
 <div class="topnav-inner">
-<a href="#purpose">①目的</a>
-<a href="#summary">②結論</a>
-<a href="#structure">③具体的な問題点</a>
-<a href="#actions">④具体的な改善アクション</a>
-<a href="#method">⑤問題発見の背景と確認方法</a>
-<a href="#evidence">⑥問題だと確信した根拠</a>
+<a href="#purpose">01 目的</a>
+<a href="#summary">02 結論</a>
+<a href="#structure">03 問題点</a>
+<a href="#actions">04 改善</a>
+<a href="#method">05 背景と確認</a>
+<a href="#evidence">06 根拠</a>
 </div>
 </nav>
 <section class="hero surface">
@@ -1004,7 +968,7 @@
 <section class="surface block" id="purpose">
 <div class="block-head">
 <div>
-<p class="kicker">①目的</p>
+<p class="kicker">01</p>
 <h2 class="block-title">目的</h2>
 </div>
 <p class="block-desc">今回の文書で何を判断し、どこまで直すかを最初に固定します。</p>
@@ -1014,10 +978,10 @@
 <p class="section-note">技術上は、Mailchimp でメールが停止されておらず、<code>queue_count &gt; 0</code> が残っているものだけを対象にしています。</p>
 </div>
 </section>
-<section class="surface surface-dark block" id="summary">
+<section class="surface surface-accent block" id="summary">
 <div class="block-head">
 <div>
-<p class="kicker">②結論</p>
+<p class="kicker">02</p>
 <h2 class="block-title">結論</h2>
 </div>
 <p class="block-desc">最初に判断に必要な事実だけを置いています。詳細な証拠はこの下で追えます。</p>
@@ -1042,7 +1006,7 @@
 <section class="surface surface-warm block" id="structure">
 <div class="block-head">
 <div>
-<p class="kicker">③具体的な問題点</p>
+<p class="kicker">03</p>
 <h2 class="block-title">具体的な問題点</h2>
 </div>
 <p class="block-desc">問題はすべて、メール本文の先にある UTAGE ページ内の LINE 直リンクです。Mailchimp 側ではなく、着地先ページ側で起きています。</p>
@@ -1168,7 +1132,7 @@
 <section class="surface surface-accent block" id="actions">
 <div class="block-head">
 <div>
-<p class="kicker">④具体的な改善アクション</p>
+<p class="kicker">04</p>
 <h2 class="block-title">具体的な改善アクション</h2>
 </div>
 <p class="block-desc">実際に直す順番にしています。ここだけ読めば作業に入れます。</p>
@@ -1212,7 +1176,7 @@
 <section class="surface block" id="method">
 <div class="block-head">
 <div>
-<p class="kicker">⑤問題発見の背景と確認方法</p>
+<p class="kicker">05</p>
 <h2 class="block-title">問題発見の背景と確認方法</h2>
 </div>
 <p class="block-desc">まず今も送信待ちが残っているかを確認し、その後でメール本文、UTAGE ページ、LINE 着地先の順に辿って確認しました。</p>
@@ -1259,7 +1223,7 @@
 <section class="surface block" id="evidence">
 <div class="block-head">
 <div>
-<p class="kicker">⑥問題だと確信した根拠</p>
+<p class="kicker">06</p>
 <h2 class="block-title">問題だと確信した根拠</h2>
 </div>
 <p class="block-desc">今も動いていると判断した根拠と、本当に問題だと判断した根拠を分けて整理しています。</p>
@@ -1457,7 +1421,7 @@
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'block-toggle';
-      button.textContent = '開閉';
+      button.setAttribute('aria-label', 'セクションを開閉');
       head.appendChild(button);
 
       if (block.id !== 'summary') {
@@ -1467,6 +1431,21 @@
       button.addEventListener('click', () => {
         block.classList.toggle('is-collapsed');
       });
+    });
+
+    const revealTargets = document.querySelectorAll('.hero, .stat-card, section.surface.block, details.journey-block');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+
+    revealTargets.forEach((target) => {
+      target.classList.add('reveal-on-scroll');
+      revealObserver.observe(target);
     });
 
     document.querySelectorAll('[data-target]').forEach((button) => {
