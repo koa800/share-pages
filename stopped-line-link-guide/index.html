@@ -6,7 +6,7 @@
   <title>停止中LINE誤接続 修正ガイド</title>
   <style>
     :root {
-      --page-width: 1180px;
+      --page-width: 1220px;
       --bg: #f3f5f0;
       --surface: rgba(255, 253, 249, 0.98);
       --surface-soft: #f7faf5;
@@ -168,14 +168,14 @@
 
     .nav-index {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: 0.08em;
       line-height: 1;
     }
 
     .nav-label {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
       line-height: 1.18;
     }
@@ -185,7 +185,7 @@
     }
 
     .hero {
-      padding: 34px 28px 28px;
+      padding: 42px 34px 30px;
       margin-bottom: 16px;
       position: relative;
       overflow: hidden;
@@ -225,8 +225,8 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.24fr) minmax(312px, 392px);
-      gap: 30px;
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 392px);
+      gap: 40px;
       align-items: start;
       position: relative;
       z-index: 1;
@@ -242,12 +242,12 @@
     }
 
     h1 {
-      margin: 0 0 16px;
-      max-inline-size: 11.6ch;
-      font-size: clamp(36px, 5.2vw, 62px);
-      line-height: 0.98;
+      margin: 0 0 18px;
+      max-inline-size: 14.2ch;
+      font-size: clamp(32px, 4.6vw, 56px);
+      line-height: 1.02;
       letter-spacing: -0.05em;
-      font-weight: 760;
+      font-weight: 700;
       color: #173026;
       text-wrap: balance;
     }
@@ -263,10 +263,10 @@
     }
 
     .lead {
-      max-inline-size: 38ch;
-      color: #223328;
+      max-inline-size: 39ch;
+      color: #2c3c32;
       font-size: 17px;
-      line-height: 1.8;
+      line-height: 1.86;
     }
 
     .hero-meta-row {
@@ -283,19 +283,21 @@
       border-radius: 999px;
       border: 1px solid var(--line);
       background: #fbfcfa;
-      color: var(--muted);
+      color: #4f6155;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 650;
     }
 
     .hero-note {
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 249, 243, 0.94));
+      padding: 24px 22px 22px;
+      border: 1px solid rgba(18, 32, 24, 0.08);
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 249, 244, 0.92)),
+        radial-gradient(circle at top right, rgba(53, 104, 212, 0.07), transparent 42%);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 18px 34px rgba(17, 31, 21, 0.06);
+      box-shadow: 0 20px 40px rgba(17, 31, 21, 0.06);
     }
 
     .hero-note p:last-child {
@@ -312,34 +314,73 @@
       pointer-events: none;
     }
 
+    .hero-side-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .hero-side-title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      color: #1b3026;
+    }
+
+    .hero-side-copy {
+      margin: 0;
+      color: #57675c;
+      font-size: 14px;
+      line-height: 1.72;
+    }
+
     .quick-list {
       display: grid;
-      gap: 12px;
-      margin-top: 14px;
+      gap: 10px;
+      margin-top: 0;
     }
 
     .quick-item {
-      padding: 18px 16px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: #fff;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px 16px 15px;
+      border: 1px solid rgba(18, 32, 24, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.86);
       position: relative;
-      box-shadow: 0 12px 24px rgba(18, 32, 24, 0.03);
+      box-shadow: 0 10px 22px rgba(18, 32, 24, 0.03);
     }
 
     .quick-item.is-warn {
-      background: var(--warn-soft);
+      background: linear-gradient(180deg, rgba(255, 244, 237, 0.96), rgba(255, 249, 245, 0.92));
       border-color: rgba(182, 64, 36, 0.14);
     }
 
     .quick-item.is-ok {
-      background: var(--surface-ok);
+      background: linear-gradient(180deg, rgba(238, 248, 242, 0.96), rgba(249, 252, 250, 0.92));
       border-color: rgba(30, 106, 71, 0.14);
+    }
+
+    .quick-step {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: rgba(18, 32, 24, 0.05);
+      color: #44564a;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
     }
 
     .quick-label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       color: var(--muted);
       font-size: 12px;
       font-weight: 800;
@@ -349,67 +390,85 @@
 
     .quick-item strong {
       display: block;
-      margin-bottom: 6px;
-      font-size: 19px;
-      line-height: 1.3;
+      margin-bottom: 4px;
+      font-size: 18px;
+      line-height: 1.36;
       letter-spacing: -0.02em;
-      font-weight: 760;
+      font-weight: 700;
+      color: #1b3026;
     }
 
-    .service-strip {
+    .quick-body p {
+      margin-bottom: 0;
+      color: #526258;
+      font-size: 14px;
+      line-height: 1.66;
+    }
+
+    .flow-strip {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 24px;
+      gap: 16px;
+      margin-top: 26px;
       position: relative;
       align-items: stretch;
     }
 
-    .service-strip::before {
+    .flow-strip::before {
       content: "";
       position: absolute;
-      left: 11%;
-      right: 11%;
-      top: 50%;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(30, 106, 71, 0.12), rgba(53, 104, 212, 0.14), rgba(30, 106, 71, 0.12));
-      transform: translateY(-50%);
+      left: 14%;
+      right: 14%;
+      top: 26px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(30, 106, 71, 0.1), rgba(53, 104, 212, 0.14), rgba(30, 106, 71, 0.1));
       pointer-events: none;
     }
 
-    .service-card {
+    .flow-card {
       display: grid;
-      grid-template-columns: 44px minmax(0, 1fr);
-      gap: 12px;
-      padding: 16px;
-      border: 1px solid var(--line);
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid rgba(18, 32, 24, 0.08);
       border-radius: 22px;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.88);
       position: relative;
-      box-shadow: 0 10px 22px rgba(18, 32, 24, 0.04);
+      box-shadow: 0 12px 28px rgba(18, 32, 24, 0.04);
       z-index: 1;
     }
 
-    .service-icon {
-      width: 44px;
-      height: 44px;
-      padding: 7px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: #fffdf8;
+    .flow-icon {
+      width: 52px;
+      height: 52px;
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(18, 32, 24, 0.08);
+      background: linear-gradient(180deg, #fffefb, #f7faf5);
       object-fit: contain;
     }
 
-    .service-card strong {
+    .flow-kicker {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .flow-card strong {
       display: block;
       margin-bottom: 4px;
       font-size: 16px;
       line-height: 1.35;
+      font-weight: 700;
     }
 
-    .service-card p {
+    .flow-card p {
       margin-bottom: 0;
-      color: var(--muted);
+      color: #526258;
       font-size: 14px;
       line-height: 1.6;
     }
@@ -752,7 +811,7 @@
     .scenario-panel > summary {
       list-style: none;
       cursor: pointer;
-      padding: 22px 68px 20px 28px;
+      padding: 24px 78px 22px 30px;
       position: relative;
       background:
         linear-gradient(180deg, rgba(255,255,255,.98), rgba(249,251,246,.98));
@@ -765,17 +824,17 @@
     .scenario-panel > summary::after {
       content: "+";
       position: absolute;
-      right: 16px;
-      top: 16px;
+      right: 18px;
+      top: 22px;
       display: grid;
       place-items: center;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
       border: 1px solid var(--line-strong);
       background: var(--accent-soft);
       color: var(--accent);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       line-height: 1;
     }
@@ -790,8 +849,7 @@
 
     .scenario-head {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 12px;
+      gap: 14px;
       align-items: start;
     }
 
@@ -823,7 +881,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      justify-content: flex-end;
+      justify-content: flex-start;
     }
 
     .badge {
@@ -1340,7 +1398,7 @@
       .repair-card:hover,
       .scenario-panel:hover,
       .stat-card:hover,
-      .service-card:hover,
+      .flow-card:hover,
       .quick-item:hover,
       .evidence-card:hover {
         transform: translateY(-2px);
@@ -1360,13 +1418,13 @@
         grid-template-columns: 1fr;
       }
 
-      .service-strip,
+      .flow-strip,
       .evidence-grid,
       .jump-grid {
         grid-template-columns: 1fr;
       }
 
-      .service-strip::before {
+      .flow-strip::before {
         display: none;
       }
     }
@@ -1387,10 +1445,6 @@
       .signal-grid,
       .proof-grid,
       .audit-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .scenario-head {
         grid-template-columns: 1fr;
       }
 
@@ -1430,7 +1484,7 @@
         gap: 4px;
       }
 
-      .service-strip {
+      .flow-strip {
         grid-template-columns: 1fr;
       }
 
@@ -1439,12 +1493,12 @@
       }
 
       .scenario-panel > summary {
-        padding: 18px 56px 18px 24px;
+        padding: 20px 60px 18px 22px;
       }
 
       .scenario-panel > summary::after {
-        right: 14px;
-        top: 14px;
+        right: 16px;
+        top: 18px;
       }
 
       .block-desc {
@@ -1534,53 +1588,69 @@
         <div class="hero-grid">
           <div>
             <p class="eyebrow">共有・修正ガイド</p>
-            <h1>停止中LINEへの誤接続を、<span class="hero-highlight">今日直せる状態</span>にする修正ガイド。</h1>
-            <p class="lead">2026年3月9日時点で、送信待ちが残っている 5 メールだけを対象に、どのメールのどのリンクが、どの UTAGE ページで停止中の LINE につながっているのかを、修正順のまま整理しています。</p>
+            <h1>停止中LINE誤接続を、<span class="hero-highlight">今日直せる</span>修正ガイド。</h1>
+            <p class="lead">2026年3月9日時点で、送信待ちが残る 5 メールだけを対象に、どのメールのどのリンクが、どの UTAGE ページで停止中の LINE につながるかを、修正順のまま整理しています。</p>
             <div class="hero-meta-row">
               <span class="pill">対象は送信待ち人数が残っているメールのみ</span>
               <span class="pill">主問題は UTAGE ページ内の停止中LINE直リンク</span>
               <span class="pill">運用原則は LINE リンクを必ず short.io にすること</span>
             </div>
           </div>
-          <aside class="hero-note" aria-label="30秒で判断">
-            <p class="eyebrow">30秒で判断</p>
+          <aside class="hero-note" aria-label="今日の判断">
+            <div class="hero-side-head">
+              <p class="eyebrow">今日の判断</p>
+              <p class="hero-side-title">まず見るべきことは、3つだけです。</p>
+              <p class="hero-side-copy">読む順番ではなく、直す順番で並べています。最初にここを見れば、修正担当者が何から手を付けるべきかがすぐ分かります。</p>
+            </div>
             <div class="quick-list">
               <div class="quick-item is-warn">
-                <span class="quick-label">今日直す対象</span>
-                <strong>3 シナリオ / 5 メール / 6 ページ</strong>
-                <p>古い残骸や停止中メールではなく、今も送信待ちが残っているものだけに絞っています。</p>
+                <span class="quick-step">01</span>
+                <div class="quick-body">
+                  <span class="quick-label">今日直す対象</span>
+                  <strong>3 シナリオ / 5 メール / 6 ページ</strong>
+                  <p>古い残骸や停止中メールではなく、今も送信待ちが残っているものだけに絞っています。</p>
+                </div>
               </div>
               <div class="quick-item">
-                <span class="quick-label">問題の場所</span>
-                <strong>Mailchimp ではなく、リンク先の UTAGE ページです。</strong>
-                <p>メール本文を開いた先で、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</p>
+                <span class="quick-step">02</span>
+                <div class="quick-body">
+                  <span class="quick-label">問題の場所</span>
+                  <strong>Mailchimp ではなく、リンク先の UTAGE ページです。</strong>
+                  <p>メール本文を開いた先で、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</p>
+                </div>
               </div>
               <div class="quick-item is-ok">
-                <span class="quick-label">直し方</span>
-                <strong>停止中LINE直リンクを消し、正しい short.io に差し替えます。</strong>
-                <p>直す場所は UTAGE ページ内の LINE リンクだけです。差し替え後は実際に押して確認します。</p>
+                <span class="quick-step">03</span>
+                <div class="quick-body">
+                  <span class="quick-label">直し方</span>
+                  <strong>停止中LINE直リンクを消し、正しい short.io に差し替えます。</strong>
+                  <p>直す場所は UTAGE ページ内の LINE リンクだけです。差し替え後は実際に押して確認します。</p>
+                </div>
               </div>
             </div>
           </aside>
         </div>
-        <div class="service-strip" aria-label="確認した導線">
-          <article class="service-card">
-            <img class="service-icon" src="https://mailchimp.com/release/plums/3a3e92cfc284c7bc.ico" alt="Mailchimp 公式アイコン" width="44" height="44" referrerpolicy="no-referrer">
+        <div class="flow-strip" aria-label="確認した導線">
+          <article class="flow-card">
+            <img class="flow-icon" src="https://mailchimp.com/release/plums/3a3e92cfc284c7bc.ico" alt="Mailchimp 公式アイコン" width="52" height="52" referrerpolicy="no-referrer">
             <div>
+              <span class="flow-kicker">起点</span>
               <strong>Mailchimp</strong>
               <p>送信待ちが残る 5 メールだけを対象に確認しています。</p>
             </div>
           </article>
-          <article class="service-card">
-            <img class="service-icon" src="https://utage-system.com/favicon/android-chrome-256x256.png" alt="UTAGE 公式アイコン" width="44" height="44" referrerpolicy="no-referrer">
+          <article class="flow-card">
+            <img class="flow-icon" src="https://utage-system.com/favicon/android-chrome-256x256.png" alt="UTAGE 公式アイコン" width="52" height="52" referrerpolicy="no-referrer">
             <div>
+              <span class="flow-kicker">原因</span>
               <strong>UTAGE</strong>
               <p>メールリンクの着地先ページ内に、誤った LINE リンクが残っています。</p>
             </div>
           </article>
-          <article class="service-card">
-            <img class="service-icon" src="https://line.me/favicon.ico" alt="LINE 公式アイコン" width="44" height="44" referrerpolicy="no-referrer">
+          <article class="flow-card">
+            <img class="flow-icon" src="https://line.me/favicon.ico" alt="LINE 公式アイコン" width="52" height="52" referrerpolicy="no-referrer">
             <div>
+              <span class="flow-kicker">結果</span>
               <strong>LINE</strong>
               <p>停止中の「みかみ」へ飛ぶため、ここで誤接続が起きます。</p>
             </div>
