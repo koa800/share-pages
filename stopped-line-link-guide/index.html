@@ -1070,6 +1070,99 @@
       gap: 12px;
     }
 
+    .method-flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+      position: relative;
+    }
+
+    .method-flow::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(30, 106, 71, 0.08), rgba(30, 106, 71, 0.2), rgba(30, 106, 71, 0.08));
+      z-index: 0;
+    }
+
+    .flow-step {
+      position: relative;
+      z-index: 1;
+      padding: 16px 14px 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 12px 26px rgba(18, 32, 24, 0.04);
+    }
+
+    .flow-step strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+      line-height: 1.42;
+      font-weight: 760;
+    }
+
+    .flow-step p:last-child {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .flow-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid rgba(30, 106, 71, 0.12);
+    }
+
+    .audit-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 14px;
+    }
+
+    .audit-card {
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+    }
+
+    .audit-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 17px;
+      line-height: 1.42;
+      font-weight: 760;
+    }
+
+    .audit-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .audit-item {
+      padding: 12px 12px 11px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfcfa;
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
     .process-card {
       padding: 16px;
       border: 1px solid var(--line);
@@ -1103,6 +1196,132 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .proof-card {
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 12px 26px rgba(18, 32, 24, 0.04);
+    }
+
+    .proof-card.is-ok {
+      background: linear-gradient(180deg, #f6fbf8, #ffffff);
+      border-color: rgba(30, 106, 71, 0.14);
+    }
+
+    .proof-card.is-warn {
+      background: linear-gradient(180deg, #fff8f3, #ffffff);
+      border-color: rgba(182, 64, 36, 0.14);
+    }
+
+    .proof-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 760;
+    }
+
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .snapshot-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 12px 24px rgba(18, 32, 24, 0.04);
+    }
+
+    .snapshot-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .snapshot-head strong {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 760;
+    }
+
+    .snapshot-meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .snapshot-window {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f9fbf8, #ffffff);
+      margin-bottom: 12px;
+    }
+
+    .snapshot-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .snapshot-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(18, 32, 24, 0.18);
+    }
+
+    .snapshot-line {
+      height: 10px;
+      margin-bottom: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(18,32,24,0.09), rgba(18,32,24,0.05));
+    }
+
+    .snapshot-line.is-strong {
+      height: 12px;
+      background: linear-gradient(90deg, rgba(30,106,71,0.18), rgba(30,106,71,0.06));
+    }
+
+    .snapshot-line.is-warn {
+      background: linear-gradient(90deg, rgba(182,64,36,0.18), rgba(182,64,36,0.05));
+    }
+
+    .snapshot-line.w-80 { width: 80%; }
+    .snapshot-line.w-72 { width: 72%; }
+    .snapshot-line.w-64 { width: 64%; }
+    .snapshot-line.w-56 { width: 56%; }
+    .snapshot-line.w-44 { width: 44%; }
+
+    .snapshot-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .snapshot-item {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fbfcfa;
+      font-size: 13px;
+      line-height: 1.58;
     }
 
     .evidence-card {
@@ -1195,7 +1414,9 @@
       .stat-grid,
       .action-grid,
       .process-grid,
-      .signal-grid {
+      .signal-grid,
+      .proof-grid,
+      .audit-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1209,6 +1430,16 @@
 
       .jump-grid {
         grid-template-columns: 1fr;
+      }
+
+      .method-flow,
+      .snapshot-grid,
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .method-flow::before {
+        display: none;
       }
     }
 
@@ -1882,43 +2113,60 @@
           <p class="block-desc">まず今も送信待ちが残っているかを確認し、その後でメール本文、UTAGE ページ、LINE 着地先の順に辿って確認しました。</p>
         </div>
         <div class="block-content">
-          <div class="process-grid">
-            <article class="process-card">
-              <strong>1. Mailchimp で対象メールを絞る</strong>
-              <p>メールが停止されておらず、まだ送信待ちの人が残っているものだけを対象にしました。</p>
+          <div class="method-flow" aria-label="確認フロー">
+            <article class="flow-step">
+              <span class="flow-number">01</span>
+              <strong>Mailchimpで候補を絞る</strong>
+              <p>送信待ちが残っているメールだけを対象にしました。</p>
             </article>
-            <article class="process-card">
-              <strong>2. 一時停止中メールは除外する</strong>
-              <p>シナリオ自体が稼働中でも、メール単位で止まっているものは今回の修正対象から外しました。</p>
+            <article class="flow-step">
+              <span class="flow-number">02</span>
+              <strong>停止中メールを除外する</strong>
+              <p>シナリオ全体が稼働中でも、メール単位で止まっているものは外しました。</p>
             </article>
-            <article class="process-card">
-              <strong>3. メール内のリンク先を開く</strong>
-              <p>画像、ボタン、テキストのどこから飛ぶのかを確認しながら、実際の UTAGE ページを開きました。</p>
+            <article class="flow-step">
+              <span class="flow-number">03</span>
+              <strong>メール内リンクを開く</strong>
+              <p>画像、ボタン、テキストのどこから飛ぶかまで確認しました。</p>
             </article>
-            <article class="process-card">
-              <strong>4. UTAGE ページ内の LINE リンクを見る</strong>
-              <p>ページ内の LINE 直リンクと short.io の両方を確認し、どこに問題があるかを切り分けました。</p>
+            <article class="flow-step">
+              <span class="flow-number">04</span>
+              <strong>UTAGEページを確認する</strong>
+              <p>ページ内の LINE 直リンクと short.io を切り分けました。</p>
             </article>
-            <article class="process-card">
-              <strong>5. 停止中LINEかどうかを照合する</strong>
-              <p>Lステップの停止中一覧と照らし合わせて、停止中の「みかみ」に当たるかを確認しました。</p>
+            <article class="flow-step">
+              <span class="flow-number">05</span>
+              <strong>停止中LINEと照合する</strong>
+              <p>Lステップの停止中一覧で「みかみ」に当たるかを確認しました。</p>
             </article>
-            <article class="process-card">
-              <strong>6. 必要なものだけ残す</strong>
-              <p>今も送信待ちが残っているメールだけを残し、古いシナリオや停止中メールは主対象から外しました。</p>
+            <article class="flow-step">
+              <span class="flow-number">06</span>
+              <strong>残す対象を確定する</strong>
+              <p>今も送信待ちが残っているものだけを主対象に残しました。</p>
             </article>
           </div>
-          <div class="check-list">
-            <strong>自分で確認するときの手順</strong>
-            <ol>
-              <li>Mailchimp で対象シナリオを開く</li>
-              <li>対象メールが停止されておらず、送信待ち人数が残っていることを確認する</li>
-              <li>そのメール内の画像、ボタン、テキストのリンク先 URL を開く</li>
-              <li>開いた UTAGE ページの中で、ページ内に置かれている LINE リンクを確認する</li>
-              <li>同じページ内に short.io がある場合は、その short.io の向き先も確認する</li>
-              <li>Lステップの停止中一覧で「みかみ」の利用停止日が 2024年9月17日であることを確認する</li>
-            </ol>
-            <p class="subtle-note" style="margin-top:10px;">技術上は、Mailchimp の送信待ち人数が 0 より大きいかで確認しています。</p>
+          <div class="audit-grid">
+            <article class="audit-card">
+              <strong>自分で確認するときの手順</strong>
+              <ol>
+                <li>Mailchimp で対象シナリオを開く</li>
+                <li>対象メールが停止されておらず、送信待ち人数が残っていることを確認する</li>
+                <li>そのメール内の画像、ボタン、テキストのリンク先 URL を開く</li>
+                <li>開いた UTAGE ページの中で、ページ内に置かれている LINE リンクを確認する</li>
+                <li>同じページ内に short.io がある場合は、その short.io の向き先も確認する</li>
+                <li>Lステップの停止中一覧で「みかみ」の利用停止日が 2024年9月17日であることを確認する</li>
+              </ol>
+              <p class="subtle-note" style="margin-top:10px;">技術上は、Mailchimp の送信待ち人数が 0 より大きいかで確認しています。</p>
+            </article>
+            <article class="audit-card">
+              <strong>今回の主対象から外したもの</strong>
+              <div class="audit-list">
+                <div class="audit-item">一時停止中のメール</div>
+                <div class="audit-item">配信停止メール</div>
+                <div class="audit-item">送信待ちが残っていないメール</div>
+                <div class="audit-item">主線ではない古い残骸導線</div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -1935,33 +2183,72 @@
           <p class="block-desc">今も動いていると判断した根拠と、本当に問題だと判断した根拠を分けて整理しています。</p>
         </div>
         <div class="block-content">
-          <div class="signal-grid">
-            <div class="panel is-ok">
+          <div class="proof-grid">
+            <article class="proof-card is-ok">
               <strong>今も動いていると判断した根拠</strong>
               <p>2026年3月9日時点で、Mailchimp 上で対象メールが停止されておらず、送信待ち人数も残っていました。</p>
               <p>SNS Facebook 個別3日間シナリオ 2025-10-15 で 70人、AI X 個別3日間シナリオで 1人、AI Facebook 個別3日間シナリオで 1人の送信待ちを確認しています。</p>
-            </div>
-            <div class="panel is-warn">
+            </article>
+            <article class="proof-card is-warn">
               <strong>本当に問題だと判断した根拠</strong>
               <p>各メールのリンク先 UTAGE ページを実際に開くと、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っていました。</p>
               <p>Lステップの停止中一覧では、この「みかみ」の利用停止日が <span class="inline-strong">2024年9月17日</span> です。したがって、少なくともこの日以降は誤接続です。</p>
-            </div>
+            </article>
           </div>
-          <div class="evidence-grid">
-            <article class="evidence-card">
-              <strong>SNS Facebook 個別3日間シナリオ 2025-10-15</strong>
-              <p class="evidence-meta">送信待ち 70人 / 稼働中メール 3通 / 確認ページ 3ページ</p>
-              <p>3通とも、リンク先の UTAGE ページ内に停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</p>
+          <div class="snapshot-grid">
+            <article class="snapshot-card">
+              <div class="snapshot-head">
+                <strong>SNS Facebook 個別3日間</strong>
+                <span class="snapshot-meta">証拠 01</span>
+              </div>
+              <div class="snapshot-window" aria-hidden="true">
+                <div class="snapshot-bar"><span class="snapshot-dot"></span><span class="snapshot-dot"></span><span class="snapshot-dot"></span></div>
+                <div class="snapshot-line is-strong w-72"></div>
+                <div class="snapshot-line w-56"></div>
+                <div class="snapshot-line is-warn w-80"></div>
+                <div class="snapshot-line w-64"></div>
+              </div>
+              <div class="snapshot-list">
+                <div class="snapshot-item">送信待ち 70人</div>
+                <div class="snapshot-item">稼働中メール 3通</div>
+                <div class="snapshot-item">確認ページ 3ページすべてで停止中リンクを確認</div>
+              </div>
             </article>
-            <article class="evidence-card">
-              <strong>AI X 個別3日間シナリオ</strong>
-              <p class="evidence-meta">送信待ち 1人 / 稼働中メール 1通 / 確認ページ 2ページ</p>
-              <p>1通の中で開く 2 ページの両方に、同じ停止中 LINE 直リンクが残っています。</p>
+            <article class="snapshot-card">
+              <div class="snapshot-head">
+                <strong>AI X 個別3日間</strong>
+                <span class="snapshot-meta">証拠 02</span>
+              </div>
+              <div class="snapshot-window" aria-hidden="true">
+                <div class="snapshot-bar"><span class="snapshot-dot"></span><span class="snapshot-dot"></span><span class="snapshot-dot"></span></div>
+                <div class="snapshot-line is-strong w-64"></div>
+                <div class="snapshot-line w-44"></div>
+                <div class="snapshot-line is-warn w-72"></div>
+                <div class="snapshot-line w-56"></div>
+              </div>
+              <div class="snapshot-list">
+                <div class="snapshot-item">送信待ち 1人</div>
+                <div class="snapshot-item">メール 1通から 2ページへ分岐</div>
+                <div class="snapshot-item">2ページとも同じ停止中リンクが残存</div>
+              </div>
             </article>
-            <article class="evidence-card">
-              <strong>AI Facebook 個別3日間シナリオ</strong>
-              <p class="evidence-meta">送信待ち 1人 / 稼働中メール 1通 / 確認ページ 1ページ</p>
-              <p>メールから開くメインページに、停止中の「みかみ」へ飛ぶ LINE 直リンクが残っています。</p>
+            <article class="snapshot-card">
+              <div class="snapshot-head">
+                <strong>AI Facebook 個別3日間</strong>
+                <span class="snapshot-meta">証拠 03</span>
+              </div>
+              <div class="snapshot-window" aria-hidden="true">
+                <div class="snapshot-bar"><span class="snapshot-dot"></span><span class="snapshot-dot"></span><span class="snapshot-dot"></span></div>
+                <div class="snapshot-line is-strong w-64"></div>
+                <div class="snapshot-line w-56"></div>
+                <div class="snapshot-line is-warn w-64"></div>
+                <div class="snapshot-line w-44"></div>
+              </div>
+              <div class="snapshot-list">
+                <div class="snapshot-item">送信待ち 1人</div>
+                <div class="snapshot-item">確認ページ 1ページ</div>
+                <div class="snapshot-item">メインページの停止中リンクを確認</div>
+              </div>
             </article>
           </div>
         </div>
