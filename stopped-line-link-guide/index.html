@@ -972,36 +972,6 @@
       line-height: 1.65;
     }
 
-    .link-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .link-action {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 72px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      box-shadow: none;
-      text-decoration: none;
-    }
-
-    .link-action.is-secondary {
-      background: #f7faf5;
-      color: var(--muted);
-    }
-
     .action-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2334,42 +2304,6 @@
 
     window.addEventListener("hashchange", openHashTarget);
     openHashTarget();
-
-    document.querySelectorAll(".link-card").forEach((card) => {
-      const link = card.querySelector(".link-url");
-      if (!link) return;
-      const actions = document.createElement("div");
-      actions.className = "link-actions";
-
-      const openLink = document.createElement("a");
-      openLink.className = "link-action";
-      openLink.href = link.href;
-      openLink.target = "_blank";
-      openLink.rel = "noopener noreferrer";
-      openLink.textContent = "開く";
-
-      const copyButton = document.createElement("button");
-      copyButton.type = "button";
-      copyButton.className = "link-action is-secondary";
-      copyButton.textContent = "コピー";
-      copyButton.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(link.href);
-          copyButton.textContent = "コピー済み";
-          window.setTimeout(() => {
-            copyButton.textContent = "コピー";
-          }, 1400);
-        } catch (error) {
-          copyButton.textContent = "失敗";
-          window.setTimeout(() => {
-            copyButton.textContent = "コピー";
-          }, 1400);
-        }
-      });
-
-      actions.append(openLink, copyButton);
-      card.append(actions);
-    });
 
     const revealTargets = document.querySelectorAll(".block, .jump-card, .scenario-panel");
     const revealObserver = new IntersectionObserver((entries) => {
